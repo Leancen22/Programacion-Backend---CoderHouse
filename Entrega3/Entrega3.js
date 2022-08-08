@@ -14,6 +14,6 @@ app.get('/productoRandom', async (req, res) => {
     res.send(productos[numeroAleatorio])
 })
 
-const server = app.listen('8081', () => {
-    console.log('Servidor corriendo en puerto 8081')
+const server = app.listen('8080', () => {
+    console.log('Servidor corriendo en puerto 8080')
 })
