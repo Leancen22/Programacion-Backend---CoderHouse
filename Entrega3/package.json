@@ -1,0 +1,16 @@
+{
+  "name": "entrega3",
+  "version": "1.0.0",
+  "description": "entrega3",
+  "main": "Entrega3.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon Entrega3"
+  },
+  "author": "Leandro Mesa",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  }
+}

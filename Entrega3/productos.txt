@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "titulo del producto 1",
+    "price": 5.99,
+    "thumbnail": "Url foto producto 1"
+  },
+  {
+    "id": 2,
+    "title": "titulo del producto 2",
+    "price": 5.99,
+    "thumbnail": "Url foto producto 2"
+  },
+  {
+    "id": 3,
+    "title": "titulo del producto 3",
+    "price": 5.99,
+    "thumbnail": "Url foto producto 3"
+  },
+  {
+    "id": 4,
+    "title": "titulo del producto 4",
+    "price": 5.99,
+    "thumbnail": "Url foto producto 4"
+  },
+  {
+    "id": 5,
+    "title": "titulo del producto 5",
+    "price": 5.99,
+    "thumbnail": "Url foto producto 5"
+  }
+]

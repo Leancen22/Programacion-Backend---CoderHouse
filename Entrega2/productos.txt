@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "title": "titulo del producto 5",
+    "price": 5.99,
+    "thumbnail": "Url foto producto 5"
+  }
+]
