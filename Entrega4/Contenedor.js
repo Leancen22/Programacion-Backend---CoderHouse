@@ -100,7 +100,13 @@ class Contenedor {
         try {
             const objetos = await this.getAll()
             const indexObj = objetos.findIndex((o) => o.id == id)
-            objetos[indexObj] = {id, ...obj}
+            const producto = await this.getById(id)
+            
+            //objetos[indexObj] = {id, ...obj}
+            objetos[indexObj].id = id
+            if (obj.title) objetos[indexObj].title = obj.title
+            if (obj.price) objetos[indexObj].price = obj.price
+            if (obj.thumbnail) objetos[indexObj].thumbnail = obj.thumbnail
 
             await fs.promises.writeFile(this.archivo, JSON.stringify(objetos, null, 2))
 

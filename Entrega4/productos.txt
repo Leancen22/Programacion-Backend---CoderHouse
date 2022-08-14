@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "title": "lvcl,mv.xcnv,xch",
-    "price": 232.4342343299,
-    "thumbnail": "djkhfsdkjfkjsdhfkjsdhfkjsdhfkds"
+    "title": "titulo3",
+    "price": 1.89,
+    "thumbnail": "imagen"
   }
 ]
