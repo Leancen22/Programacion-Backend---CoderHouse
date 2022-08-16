@@ -46,9 +46,14 @@ routerProductos.post('/', async (req, res) => {
             newId = objetos[objetos.length - 1].id + 1
         }
 
-        const productos = await contenedor.getAll()
         await contenedor.save({id: newId, ...req.body})
-        return res.status(201).json({code: 201, msg: "Nuevo producto agregado correctamente"})
+
+        const productos = await contenedor.getAll(newId)
+        const indexObj = productos.findIndex((o) => o.id == newId)
+        
+        console.log(productos[indexObj])
+
+        return res.status(201).json({code: 201, msg: "Nuevo producto agregado correctamente", producto: productos[indexObj]})
     } catch (error) {
         console.log(error)
     }
