@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "title4",
+    "price": "2.89",
+    "thumbnail": "imagen4"
+  },
+  {
+    "id": 2,
+    "title": "title4",
+    "price": "2.89",
+    "thumbnail": "imagen4"
+  },
+  {
+    "id": 3,
+    "title": "title4",
+    "price": "2.89",
+    "thumbnail": "imagen4"
+  },
+  {
+    "id": 4,
+    "title": "title5",
+    "price": "2.89",
+    "thumbnail": "imagen4"
+  },
+  {
+    "id": 5,
+    "title": "producto de prueba post",
+    "price": "precio post",
+    "thumbnail": "imagen post"
+  },
+  {
+    "id": 6,
+    "title": "test",
+    "price": "4",
+    "thumbnail": "test"
+  }
+]
