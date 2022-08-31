@@ -1,8 +1,32 @@
 [
   {
     "id": 1,
-    "nombre": "Test",
-    "precio": "1",
-    "foto": "443"
+    "nombre": "Paleta",
+    "precio": "430",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/paint-color-pallete-brush-academy-1024.png"
+  },
+  {
+    "id": 2,
+    "nombre": "Escuadra",
+    "precio": "190",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-1024.png"
+  },
+  {
+    "id": 3,
+    "nombre": "Agenda",
+    "precio": "670",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/book-note-paper-school-1024.png"
+  },
+  {
+    "id": 4,
+    "nombre": "Calculadora",
+    "precio": "560",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-1024.png"
+  },
+  {
+    "id": 5,
+    "nombre": "Paleta",
+    "precio": "232",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/paint-color-pallete-brush-academy-1024.png"
   }
 ]

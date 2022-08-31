@@ -31,48 +31,24 @@
             </form>
         </div>
 
-        <!-- <div>
+        <div>
             <h2 style="color: crimson;">Historial</h2>
             <div class="table-responsive">
                 <table class="table table-dark">
                     <tr style="color: yellow;">
                         <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Edad</th>
-                        <th>Avatar</th>
+                        <th>Precio</th>
+                        <th>Foto</th>
                     </tr>
                     <tr>
                         <td>Alicia</td>
                         <td>Rinaldi</td>
                         <td>18</td>
-                        <td>Avatar de Alicia</td>
                     </tr>
                 </table>
             </div>
-        </div>  -->
-    </div>
+        </div> 
 
-    <div class="container m-5">
-        <h3>Chat websocket</h3>
-        <form>
-            <div class="mb-3">
-              <label for="user" class="form-label">Usuario</label>
-              <input type="text" class="form-control" id="user" aria-describedby="userComment">
-              <div id="emailHelp" class="form-text">Usuario que aparecera delante del mensaje.</div>
-            </div>
-            <div class="mb-3">
-              <label for="contenidoMensaje" class="form-label">Mensaje</label>
-              <textarea class="form-control" id="contenidoMensaje" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-success btn-block" onclick="enviarMensaje()">Enviar</button>
-          </form>
-          <hr />
     </div>
-    <div id="historico">
-        <!-- Aqui se renderizara la informacion del chat desde el servidor -->
-    </div>
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/main.js"></script>
 </body>
 </html>

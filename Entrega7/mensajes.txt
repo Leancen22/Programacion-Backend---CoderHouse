@@ -1,0 +1,27 @@
+[
+  {
+    "fecha_actual": "31/8/2022 12:00:02",
+    "user": "leandro@correo.com",
+    "mensaje": "Hola\r\n "
+  },
+  {
+    "fecha_actual": "31/8/2022 12:00:40",
+    "user": "mesa@correo.com",
+    "mensaje": "Hola, como estas? "
+  },
+  {
+    "fecha_actual": "31/8/2022 12:01:01",
+    "user": "leandro@correo.com",
+    "mensaje": " Bien, gracias por preguntar!"
+  },
+  {
+    "fecha_actual": "31/8/2022 12:08:24",
+    "user": "mesa@correo.com",
+    "mensaje": "El trabajo como va?\r\n "
+  },
+  {
+    "fecha_actual": "31/8/2022 12:08:48",
+    "user": "leandro@correo.com",
+    "mensaje": " Como se pude jaja"
+  }
+]
