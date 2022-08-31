@@ -22,11 +22,5 @@
     "nombre": "Calculadora",
     "precio": "560",
     "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-1024.png"
-  },
-  {
-    "id": 5,
-    "nombre": "Paleta",
-    "precio": "232",
-    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/paint-color-pallete-brush-academy-1024.png"
   }
 ]

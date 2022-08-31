@@ -2,26 +2,26 @@
   {
     "fecha_actual": "31/8/2022 12:00:02",
     "user": "leandro@correo.com",
-    "mensaje": "Hola\r\n "
+    "mensaje": "Prueba1\n "
   },
   {
     "fecha_actual": "31/8/2022 12:00:40",
     "user": "mesa@correo.com",
-    "mensaje": "Hola, como estas? "
+    "mensaje": "Prueba2 "
   },
   {
     "fecha_actual": "31/8/2022 12:01:01",
     "user": "leandro@correo.com",
-    "mensaje": " Bien, gracias por preguntar!"
+    "mensaje": "Prueba3"
   },
   {
     "fecha_actual": "31/8/2022 12:08:24",
     "user": "mesa@correo.com",
-    "mensaje": "El trabajo como va?\r\n "
+    "mensaje": "Prueba4"
   },
   {
     "fecha_actual": "31/8/2022 12:08:48",
     "user": "leandro@correo.com",
-    "mensaje": " Como se pude jaja"
+    "mensaje": "Prueba5"
   }
 ]
