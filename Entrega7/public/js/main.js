@@ -14,7 +14,7 @@ function render(mensajes) {
 
     const cuerpoMensajesHTML = mensajes.map(msj => {
         return `
-            <span><b style="color: blue;">${msj.user}</b> <span style="color: brown;">[${msj.fecha_actual}]</span>:</span><span style="color: green;"> ${msj.mensaje}</span>
+            <span><b style="color: blue;">${msj.user}</b> <span style="color: brown;">[${msj.fecha_actual}]</span>:</span><span style="color: green; font-style: italic;"> ${msj.mensaje}</span>
         `
     }).join('<br>')
 
