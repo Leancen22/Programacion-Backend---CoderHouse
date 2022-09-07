@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/api/productos', productosRouter)
 app.use('/api/carrito', carritoRouter)
 
-const PORT = 8080 || process.env.PORT
+const PORT = 8081
 const server = app.listen(PORT, () => {
     console.log(`Desde el puerto ${PORT}`);
 });
