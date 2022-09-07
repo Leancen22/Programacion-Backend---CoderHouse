@@ -1,23 +1,12 @@
 [
   {
     "id": 2,
-    "timestamp": "7/9/2022 00:27:17",
-    "productos": [
-      {
-        "id": 6,
-        "timestamp": "7/9/2022 01:14:58",
-        "title": "titulo",
-        "price": 89,
-        "thumbnail": "foto",
-        "description": "descripcion",
-        "code": "OF00FD",
-        "stock": 3
-      }
-    ]
+    "timestamp": "7/9/2022 16:43:01",
+    "productos": []
   },
   {
     "id": 3,
-    "timestamp": "7/9/2022 01:23:33",
+    "timestamp": "7/9/2022 16:43:38",
     "productos": []
   }
 ]
