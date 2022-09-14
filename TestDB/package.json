@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node src/batch/createTable.js",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "knex": "^2.3.0",
+    "mysql": "^2.18.1"
+  }
+}
