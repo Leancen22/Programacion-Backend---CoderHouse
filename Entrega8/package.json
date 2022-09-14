@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.js"
+    "dev": "nodemon server.js",
+    "build_mensajes": "node src/batch/createTablesMensajes.js",
+    "build_productos": "node src/batch/createTablesProductos.js"
   },
   "author": "Leandro Mesa",
   "license": "ISC",
