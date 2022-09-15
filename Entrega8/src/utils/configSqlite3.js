@@ -2,7 +2,7 @@ const configSqlite3 = {
     db: {
         client: 'better-sqlite3',
         connection: {
-            filename: "./DB/mensajes.db3"
+            filename: "./DB/ecommerce.db3"
         },
         useNullAsDefault: true
     }
