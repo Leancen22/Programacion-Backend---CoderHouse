@@ -1,0 +1,245 @@
+use ecommerce
+'switched to db ecommerce'
+
+db.createCollection('productos')
+{ ok: 1 }
+db.createCollection('mensajes')
+{ ok: 1 }
+
+show collections
+mensajes
+productos
+
+/--------------Parte 1-2--------------/
+
+( Aca pude haber usado insertMany([{}, ..., {}]) )
+db.productos.insertOne({"titulo": "Producto1", "Precio": 120, "Foto": "Foto Del Producto 1"})
+{ acknowledged: true,
+  insertedId: ObjectId("6328fd843d918f13ba47d394") }
+
+db.productos.insertOne({"titulo": "Producto2", "Precio": 580, "Foto": "Foto Del Producto 2"})
+{ acknowledged: true,
+  insertedId: ObjectId("6328fd8d3d918f13ba47d395") }
+
+db.productos.insertOne({"titulo": "Producto3", "Precio": 900, "Foto": "Foto Del Producto 3"})
+{ acknowledged: true,
+  insertedId: ObjectId("6328fd953d918f13ba47d396") }
+
+db.productos.insertOne({"titulo": "Producto4", "Precio": 1280, "Foto": "Foto Del Producto 4"})
+{ acknowledged: true,
+  insertedId: ObjectId("6328fd9c3d918f13ba47d397") }
+
+db.productos.insertOne({"titulo": "Producto5", "Precio": 1700, "Foto": "Foto Del Producto 5"})
+{ acknowledged: true,
+  insertedId: ObjectId("6328fda33d918f13ba47d398") }
+
+db.productos.insertOne({"titulo": "Producto6", "Precio": 2300, "Foto": "Foto Del Producto 6"})
+{ acknowledged: true,
+  insertedId: ObjectId("6328fdab3d918f13ba47d399") }
+
+db.productos.insertOne({"titulo": "Producto7", "Precio": 2860, "Foto": "Foto Del Producto 7"})
+{ acknowledged: true,
+  insertedId: ObjectId("6328fdb33d918f13ba47d39a") }
+
+db.productos.insertOne({"titulo": "Producto8", "Precio": 3350, "Foto": "Foto Del Producto 8"})
+{ acknowledged: true,
+  insertedId: ObjectId("6328fdc23d918f13ba47d39b") }
+
+db.productos.insertOne({"titulo": "Producto9", "Precio": 4320, "Foto": "Foto Del Producto 9"})
+{ acknowledged: true,
+  insertedId: ObjectId("6328fdca3d918f13ba47d39c") }
+
+db.productos.insertOne({"titulo": "Producto10", "Precio": 4990, "Foto": "Foto Del Producto 10"})
+{ acknowledged: true,
+  insertedId: ObjectId("6328fdd33d918f13ba47d39d") }
+
+
+db.mensajes.insertMany([{"correo": "usuario1", "mensaje": "mensaje1"}, {"correo": "usuario2", "mensaje": "mensaje2"}, {"correo": "usuario3", "mensaje": "mensaje3"}, {"correo": "usuario4", "mensaje": "mensaje4"}, {"correo": "usuario5", "mensaje": "mensaje5"}, {"correo": "usuario6", "mensaje": "mensaje6"}, {"correo": "usuario7", "mensaje": "mensaje7"}, {"correo": "usuario8", "mensaje": "mensaje8"}, {"correo": "usuario9", "mensaje": "mensaje9"}, {"correo": "usuario10", "mensaje": "mensaje10"}])
+{ acknowledged: true,
+  insertedIds: 
+   { '0': ObjectId("6328ff3b3d918f13ba47d39e"),
+     '1': ObjectId("6328ff3b3d918f13ba47d39f"),
+     '2': ObjectId("6328ff3b3d918f13ba47d3a0"),
+     '3': ObjectId("6328ff3b3d918f13ba47d3a1"),
+     '4': ObjectId("6328ff3b3d918f13ba47d3a2"),
+     '5': ObjectId("6328ff3b3d918f13ba47d3a3"),
+     '6': ObjectId("6328ff3b3d918f13ba47d3a4"),
+     '7': ObjectId("6328ff3b3d918f13ba47d3a5"),
+     '8': ObjectId("6328ff3b3d918f13ba47d3a6"),
+     '9': ObjectId("6328ff3b3d918f13ba47d3a7") } }
+
+
+/--------------Parte 3--------------/
+
+db.productos.find()
+{ _id: ObjectId("6328fd843d918f13ba47d394"),
+  titulo: 'Producto1',
+  Precio: 120,
+  Foto: 'Foto Del Producto 1' }
+{ _id: ObjectId("6328fd8d3d918f13ba47d395"),
+  titulo: 'Producto2',
+  Precio: 580,
+  Foto: 'Foto Del Producto 2' }
+{ _id: ObjectId("6328fd953d918f13ba47d396"),
+  titulo: 'Producto3',
+  Precio: 900,
+  Foto: 'Foto Del Producto 3' }
+{ _id: ObjectId("6328fd9c3d918f13ba47d397"),
+  titulo: 'Producto4',
+  Precio: 1280,
+  Foto: 'Foto Del Producto 4' }
+{ _id: ObjectId("6328fda33d918f13ba47d398"),
+  titulo: 'Producto5',
+  Precio: 1700,
+  Foto: 'Foto Del Producto 5' }
+{ _id: ObjectId("6328fdab3d918f13ba47d399"),
+  titulo: 'Producto6',
+  Precio: 2300,
+  Foto: 'Foto Del Producto 6' }
+{ _id: ObjectId("6328fdb33d918f13ba47d39a"),
+  titulo: 'Producto7',
+  Precio: 2860,
+  Foto: 'Foto Del Producto 7' }
+{ _id: ObjectId("6328fdc23d918f13ba47d39b"),
+  titulo: 'Producto8',
+  Precio: 3350,
+  Foto: 'Foto Del Producto 8' }
+{ _id: ObjectId("6328fdca3d918f13ba47d39c"),
+  titulo: 'Producto9',
+  Precio: 4320,
+  Foto: 'Foto Del Producto 9' }
+{ _id: ObjectId("6328fdd33d918f13ba47d39d"),
+  titulo: 'Producto10',
+  Precio: 4990,
+  Foto: 'Foto Del Producto 10' }
+
+
+db.mensajes.find()
+{ _id: ObjectId("6328ff3b3d918f13ba47d39e"),
+  correo: 'usuario1',
+  mensaje: 'mensaje1' }
+{ _id: ObjectId("6328ff3b3d918f13ba47d39f"),
+  correo: 'usuario2',
+  mensaje: 'mensaje2' }
+{ _id: ObjectId("6328ff3b3d918f13ba47d3a0"),
+  correo: 'usuario3',
+  mensaje: 'mensaje3' }
+{ _id: ObjectId("6328ff3b3d918f13ba47d3a1"),
+  correo: 'usuario4',
+  mensaje: 'mensaje4' }
+{ _id: ObjectId("6328ff3b3d918f13ba47d3a2"),
+  correo: 'usuario5',
+  mensaje: 'mensaje5' }
+{ _id: ObjectId("6328ff3b3d918f13ba47d3a3"),
+  correo: 'usuario6',
+  mensaje: 'mensaje6' }
+{ _id: ObjectId("6328ff3b3d918f13ba47d3a4"),
+  correo: 'usuario7',
+  mensaje: 'mensaje7' }
+{ _id: ObjectId("6328ff3b3d918f13ba47d3a5"),
+  correo: 'usuario8',
+  mensaje: 'mensaje8' }
+{ _id: ObjectId("6328ff3b3d918f13ba47d3a6"),
+  correo: 'usuario9',
+  mensaje: 'mensaje9' }
+{ _id: ObjectId("6328ff3b3d918f13ba47d3a7"),
+  correo: 'usuario10',
+  mensaje: 'mensaje10' }
+
+
+/--------------Parte 4--------------/
+
+db.mensajes.countDocuments()
+10
+
+db.productos.countDocuments()
+10
+
+/--------------Parte 5--------------/
+
+/--------------Parte 5a--------------/
+db.productos.insertOne({"nombre": "Producto Extra", "Precio": 1001, "Foto": "Foto de producto extra"})
+{ acknowledged: true,
+  insertedId: ObjectId("632902c53d918f13ba47d3a8") }
+
+/--------------Parte 5b1--------------/
+db.productos.find({"Precio": {$lt: 1000}})
+{ _id: ObjectId("6328fd843d918f13ba47d394"),
+  titulo: 'Producto1',
+  Precio: 120,
+  Foto: 'Foto Del Producto 1' }
+{ _id: ObjectId("6328fd8d3d918f13ba47d395"),
+  titulo: 'Producto2',
+  Precio: 580,
+  Foto: 'Foto Del Producto 2' }
+{ _id: ObjectId("6328fd953d918f13ba47d396"),
+  titulo: 'Producto3',
+  Precio: 900,
+  Foto: 'Foto Del Producto 3' }
+
+/--------------Parte 5b2-------------/
+db.productos.find({$and: [{"Precio": {$gt: 1000}}, {"Precio": {$lt: 3000}}]})
+{ _id: ObjectId("6328fd9c3d918f13ba47d397"),
+  titulo: 'Producto4',
+  Precio: 1280,
+  Foto: 'Foto Del Producto 4' }
+{ _id: ObjectId("6328fda33d918f13ba47d398"),
+  titulo: 'Producto5',
+  Precio: 1700,
+  Foto: 'Foto Del Producto 5' }
+{ _id: ObjectId("6328fdab3d918f13ba47d399"),
+  titulo: 'Producto6',
+  Precio: 2300,
+  Foto: 'Foto Del Producto 6' }
+{ _id: ObjectId("6328fdb33d918f13ba47d39a"),
+  titulo: 'Producto7',
+  Precio: 2860,
+  Foto: 'Foto Del Producto 7' }
+{ _id: ObjectId("632902c53d918f13ba47d3a8"),
+  nombre: 'Producto Extra',
+  Precio: 1001,
+  Foto: 'Foto de producto extra' }
+
+/--------------Parte 5b3--------------/
+db.productos.find({"Precio": {$gt: 3000}})
+{ _id: ObjectId("6328fdc23d918f13ba47d39b"),
+  titulo: 'Producto8',
+  Precio: 3350,
+  Foto: 'Foto Del Producto 8' }
+{ _id: ObjectId("6328fdca3d918f13ba47d39c"),
+  titulo: 'Producto9',
+  Precio: 4320,
+  Foto: 'Foto Del Producto 9' }
+{ _id: ObjectId("6328fdd33d918f13ba47d39d"),
+  titulo: 'Producto10',
+  Precio: 4990,
+  Foto: 'Foto Del Producto 10' }
+
+
+/--------------Parte 5c--------------/
+db.productos.updateMany({}, {$set: {"stock": 100}})
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 11,
+  modifiedCount: 11,
+  upsertedCount: 0 }
+
+/--------------Parte 5d--------------/
+db.productos.updateMany({"Precio": {$gt: 4000}}, {$set: {"stock": 0}})
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0 }
+
+/--------------Parte 5e--------------/
+db.productos.deleteMany({"Precio": {$lt: 1000}})
+{ acknowledged: true, deletedCount: 3 }
+
+/--------------Parte 6--------------/
+use admin
+
+db.createUser({user: "pepe", pwd: "asd456", roles: [{role: "read", db: "ecommerce"}]})
+{ ok: 1 }
+
+
