@@ -7,8 +7,8 @@ class CarritosDaoMongo extends ContenedorMongo {
         })
     }    
 
-    async save(carrito = {productos: []}) {
-        return super.guardar(carrito)
+    async save(carrito = {productos: []}){
+        return super.save(carrito)
     }
 }
 

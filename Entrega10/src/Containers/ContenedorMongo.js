@@ -20,7 +20,11 @@ class ContenedorMongo {
     }
 
     async getAll() {
-        return this.coleccion.find({})
+        try {
+            return this.coleccion.find({})
+        } catch (error) {
+            throw error
+        }
     }
 
     async save(obj) {

@@ -27,5 +27,5 @@ export default {
     config: {
         administrator: true
     },
-    MODO_PERSISTENCIA: 'json'
+    MODO_PERSISTENCIA: 'mongo'
 }
