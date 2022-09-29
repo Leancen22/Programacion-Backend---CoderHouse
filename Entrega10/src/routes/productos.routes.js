@@ -16,7 +16,7 @@ function Administrator (req, res, next) {
 
 productosRouter.get('/', async (req, res) => {
     try {
-    return res.status(200).json(await producto.getAll())
+        return res.json(await producto.getAll())
     } catch (error) {
         res.status(500).json({ code: 500, msg: error })
         throw new Error(`Error al listar los productos ${error}`)
@@ -26,7 +26,7 @@ productosRouter.get('/', async (req, res) => {
 productosRouter.get('/:id', async (req, res) => {
     
     try {
-        if(config.MODO_PERSISTENCIA == 'firebase') {
+        if(config.MODO_PERSISTENCIA == 'firebase' || config.MODO_PERSISTENCIA == 'mongo') {
 
             const productos = await producto.getById(req.params.id);
             res.json(productos);
@@ -49,23 +49,31 @@ productosRouter.get('/:id', async (req, res) => {
 
 productosRouter.post('/', Administrator, async (req, res) => {
     try {
-        const objetos = await producto.getAll()
 
-        let newId
-        if (objetos.length == 0) {
-            newId = 1
+        if (config.MODO_PERSISTENCIA == 'mongo') {
+
+            await producto.save(req.body)
+
+            return res.status(201).json({code: 201, msg: "Nuevo producto agregado correctamente"})
         } else {
-            newId = objetos[objetos.length - 1].id + 1
+            const objetos = await producto.getAll()
+
+            let newId
+            if (objetos.length == 0) {
+                newId = 1
+            } else {
+                newId = objetos[objetos.length - 1].id + 1
+            }
+
+            await producto.save({id: newId, ...req.body})
+
+            const productos = await producto.getAll(newId)
+            const indexObj = productos.findIndex((o) => o.id == newId)
+            
+            console.log(productos[indexObj])
+
+            return res.status(201).json({code: 201, msg: "Nuevo producto agregado correctamente", producto: productos[indexObj]})
         }
-
-        await producto.save({id: newId, ...req.body})
-
-        const productos = await producto.getAll(newId)
-        const indexObj = productos.findIndex((o) => o.id == newId)
-        
-        console.log(productos[indexObj])
-
-        return res.status(201).json({code: 201, msg: "Nuevo producto agregado correctamente", producto: productos[indexObj]})
 
     } catch (error) {
         console.log(error)
@@ -73,29 +81,6 @@ productosRouter.post('/', Administrator, async (req, res) => {
 })
 
 productosRouter.put('/:id', Administrator, async (req, res) => {
-    // try {
-
-    //     const id = parseInt(req.params.id)        
-    //     const {title, description, price, thumbnail, code, stock} = req.body
-
-    //     if (isNaN(id)) {
-    //         return res.status(404).json({code: 404, msg: "El parametro ingresado no es un numero"})
-    //     }
-
-    //     const productos = await producto.getAll(id)
-    //     const indexObj = productos.findIndex((o) => o.id == id)
-
-    //     if (indexObj == -1) {
-    //         return res.status(404).json({code: 404, msg: `El producto solicitado con id ${id} no existe`})
-    //     }
-
-    //     await producto.updateById(id, {title, description, price, thumbnail, code, stock})
-
-    //     res.status(200).json({code: 200, msg: `Producto con id ${id} actualizado correctamente`})
-
-    // } catch (error) {
-    //     console.log(error)
-    // }
     try {
         const data = req.body;
         const { id } = req.params;

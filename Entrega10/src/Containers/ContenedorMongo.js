@@ -21,14 +21,15 @@ class ContenedorMongo {
 
     async getAll() {
         try {
-            return this.coleccion.find({})
+            let docs = await this.coleccion.find({})
         } catch (error) {
             throw error
         }
     }
 
     async save(obj) {
-        return this.coleccion.create(obj)
+        return await this.coleccion.create(obj)
+ 
     }
 
     async updateById(id, obj) {
