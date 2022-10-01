@@ -1,7 +1,9 @@
-import ContenedorMemoria from '../../Containers/ContenedorMemoria.js'
+import ContainerMemoria from "../../Containers/ContainerMemoria.js";
 
-class ProductosDaoMemoria extends ContenedorMemoria {
-
+class ProductosDaoMemoria extends ContainerMemoria {
+    constructor() {
+        super()
+    }
 }
 
 export default ProductosDaoMemoria

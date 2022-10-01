@@ -1,19 +1,15 @@
 import express from 'express'
-import path from 'path'
-const {Router} = express
+import productosRouter from "./src/routers/productos.router.js";
+import carritosRouter from "./src/routers/carritos.router.js";
 
 const app = express()
-import productosRouter from './src/routes/productos.routes.js'
-import carritoRouter from './src/routes/carrito.routes.js'
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.use('/api/productos', productosRouter)
-app.use('/api/carrito', carritoRouter)
+app.use('/api/carritos', carritosRouter)
 
-const PORT = 8081
-const server = app.listen(PORT, () => {
-    console.log(`Servidor corriendo en puerto ${PORT}`)
+const server = app.listen(8000, () => {
+    console.log('Server run in port 8000')
 })
-server.on('Error', err => console.log(`Ha ocurrido un error en el servidor ${err}`))

@@ -1,8 +1,8 @@
-import ContenedorArchivo from "../../Containers/ContenedorArchivo.js"
+import ContainerArchivo from "../../Containers/ContainerArchivo.js";
 
-class CarritosDaoArchivo extends ContenedorArchivo {
+class CarritosDaoArchivo extends ContainerArchivo {
     constructor(archivo) {
-        super('./carrito.json')
+        super('./DB/carritos.json');
     }
 }
 

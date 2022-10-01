@@ -1,25 +1,13 @@
-import ContenedorFirebase from "../../Containers/ContenedorFirebase.js"
+import ContainerFirebase from "../../Containers/ContainerFirebase.js";
 
-class CarritosDaoFirebase extends ContenedorFirebase {
-
+class CarritosDaoFirebase extends ContainerFirebase {
     constructor() {
-        super('carrito')
+        super('carritos');
     }
 
-    async save(carrito = { productos: [] }) {
-        return super.save(carrito)
+    async guardar(carrito = { productos: [] }) {
+        return super.guardar(carrito)
     }
 }
-
-// async function main() {
-//     const f = new ProductosDaoFirebase('productos')
-//     console.log(await f.getAll())
-//     console.log(await f.updateById('DodBYVg8A8w2sHlCUgO0', {'nombre': 'nuevo nombre'}))
-//     await f.deleteById('uEzRh3noaRSur3iOHRqF')
-//     await f.deleteById('nE7o2j7Q95EX21PB3dXR')
-//     await f.deleteById('m6NkabNspOFH6UAI9d3B')
-
-// }
-// main()
 
 export default CarritosDaoFirebase
