@@ -15,11 +15,11 @@ productosRouter.get('/:id', async (req, res) => {
         if (index != -1) {
             res.json(await ProductoDao.listar(req.params.id))
         } else {
-            res.send('No se escontro')
+            res.send('No se escontro el producto solicitado')
         }
 
     }catch (e) {
-        res.json({code: 404, msg: 'No se encontro'})
+        res.json({code: 500, msg: `Error al obtener por id: ${e}`})
     }
 })
 

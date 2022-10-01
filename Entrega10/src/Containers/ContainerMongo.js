@@ -16,13 +16,15 @@ class ContainerMongo {
 
     async listar(id) {
         try {
-            const docs = await this.collecion.find({'_id': id}, {__v: 0})
-            if (docs.length == 0) {
-                throw new Error(`Error al listar`)
-            } else {
-                return docs[0]
+            if (mongoose.Types.ObjectId.isValid(id)) {
+                const docs = await this.collecion.find({'_id': id}, {__v: 0})
+                if (docs.length == 0) {
+                    throw Error('El producto solicitado no existe')
+                } else {
+                    return docs[0]
+                }
             }
-        } catch (e) {
+        } catch (error) {
             throw new Error(`Error al listar ${error}`)
         }
     }

@@ -1,5 +1,5 @@
 const config = {
-    modo: 'firebase',
+    modo: 'memoria',
     mongo: {
         host: 'localhost',
         port: 27017,
