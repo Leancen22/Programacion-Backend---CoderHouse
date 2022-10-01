@@ -13,14 +13,13 @@ productosRouter.get('/:id', async (req, res) => {
         const index = productos.findIndex(o => (o.id || o._id) == req.params.id)
 
         if (index != -1) {
-            res.status(200).json(await ProductoDao.listar(req.params.id))
+            res.json(await ProductoDao.listar(req.params.id))
         } else {
-            res.status(404).json('No se escontro test')
+            res.send('No se escontro')
         }
 
-        console.log(await ProductoDao.listar(req.params.id))
     }catch (e) {
-        res.status(404).json({code: 404, msg: 'No se encontro'})
+        res.json({code: 404, msg: 'No se encontro'})
     }
 })
 
@@ -40,7 +39,8 @@ productosRouter.put('/:id', async (req, res) => {
 })
 
 productosRouter.delete('/:id', async (req, res) => {
-    res.status(200).json(await ProductoDao.borrar(req.params.id))
+    await ProductoDao.borrar(req.params.id)
+    res.status(200).json({code: 200, msg: "Producto borrado exitosamente"})
 })
 
 productosRouter.delete('/', async (req, res) => {

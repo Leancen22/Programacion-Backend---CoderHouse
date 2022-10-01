@@ -13,14 +13,13 @@ carritosRouter.get('/:id', async (req, res) => {
         const index = carro.findIndex(o => (o.id || o._id) == req.params.id)
 
         if (index != -1) {
-            res.status(200).json(await CarritoDao.listar(req.params.id))
+            res.json(await CarritoDao.listar(req.params.id))
         } else {
-            res.status(404).json('No se escontro test')
+            res.send('No se escontro')
         }
 
-        console.log(await CarritoDao.listar(req.params.id))
     }catch (e) {
-        res.status(404).json({code: 404, msg: 'No se encontro'})
+        res.json({code: 404, msg: 'No se encontro'})
     }
 })
 
