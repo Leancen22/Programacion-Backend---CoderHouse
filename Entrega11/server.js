@@ -56,7 +56,7 @@ io.on('connection', async (socket) => {
     //const elem = await listarMensajesNormalizados()
     //console.log(util.inspect(elem, false, 12, true))
 
-    socket.emit('mensajes', await listarMensajesNormalizados())
+    io.sockets.emit('mensajes', await listarMensajesNormalizados())
     //socket.emit('mensajes', await mensajesApi.listarAll())
 
     socket.on('nuevoMensaje', async mensaje => {
