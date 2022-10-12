@@ -119,9 +119,7 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/logout_timeout', (req, res) => {
-    if(req.session.ttl == 0) {
-        res.render('logout_timeout', {})
-    }
+    res.render('logout_timeout', {})
 })
 
 
