@@ -79,7 +79,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 20000 //20 seg
+        maxAge: 1000*60 //20 seg
     },
     //rolling: true
 }))
@@ -197,43 +197,12 @@ app.get('/logout_timeout', (req, res) => {
     res.render('logout_timeout', {})
 })
 
-
-// app.get('/conSession', (req, res) => {
-//     if(!req.session.contador) {
-//         req.session.contador ++
-//         res.send("Bienvenido primer login")
-//     } else {
-//         req.session.contador ++
-//         res.send(`Usted ha ingredado ${req.session.contador} veces`)
-//     }
-// })
-//
-// app.get('/setCookie', (req, res) => {
-//     res.cookie('normalCookie', 'valorCookieNueva123').send(`Cookie guardada`)
-// })
-//
-// app.get('/setCookieFirmada', (req, res) => {
-//     res.cookie('signedCookie', 'valorCookieNueva123', {signed: true}).send(`Cookie guardada`)
-// })
-//
-// app.get('/setCookieVolatil', (req, res) => {
-//     res.cookie('CookieVolatil', 'CookieNueva987', {maxAge: 10000}).send(`Cookie guardada`)
-// })
-//
-// app.get('/getCookies', (req, res) => {
-//     res.send({cookies: req.cookies, signedCookies: req.signedCookies})
-// })
-//
-// app.get('/clrCookie/:cookieName', (req, res) => {
-//     res.clearCookie(req.params.cookieName).send('Cookie eliminada')
-// })
-
 /*---------------------------------------------------*/
 
 app.post('/productos', async (req, res) => {
     try {
         await ProductoDao.guardar({...req.body})
-        res.redirect('/')
+        res.redirect('/vista')
     } catch (error) {
         console.log(error)
     }
