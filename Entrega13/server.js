@@ -102,7 +102,7 @@ function isAuth(req, res, next) {
     if(req.isAuthenticated()){
         next()
     } else {
-        res.redirect('/registro')
+        res.redirect('/login')
     }
 }
 
@@ -146,7 +146,15 @@ app.get('/login', (req, res) => {
     res.render('login')
 })
 
-app.post('/login', passport.authenticate('local',  {successRedirect: '/vista', failureRedirect: '/registro'} ));
+app.get('/error-login', (req, res) => {
+    res.render('error-login')
+})
+
+app.get('/error-registro', (req, res) => {
+    res.render('error-registro')
+})
+
+app.post('/login', passport.authenticate('local',  {successRedirect: '/vista', failureRedirect: '/error-login'} ));
 
 app.get('/registro', (req, res) => {
     res.render('registro')
@@ -158,7 +166,7 @@ app.post('/registro', async (req, res) => {
     const usuarios = await UsuarioDao.listarAll()
     const usuario = usuarios.find(usr => usr.username == username)
     if (usuario) {
-        res.send('Usuario ya registrado')
+        res.redirect('/error-registro')
     } else {
         await UsuarioDao.guardar({username, password: await generateHashPassword(password)})
         res.redirect('/login')
