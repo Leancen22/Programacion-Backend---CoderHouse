@@ -113,6 +113,8 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/vista', isAuth, (req, res) => {
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+
     if(!req.user.contador) {
         req.user.contador = 1
     } else {
@@ -120,7 +122,11 @@ app.get('/vista', isAuth, (req, res) => {
     }
     const username = req.user.username
     console.log(username)
-    res.render('vista', {username})
+    if (req.user) {
+        res.render('vista', {username})
+    } else {
+        res.redirect('/login')
+    }
 })
 
 app.get('/api/productos-test', (req, res) => {
@@ -143,7 +149,11 @@ app.get('/api/productos-test', (req, res) => {
 
 
 app.get('/login', (req, res) => {
-    res.render('login')
+    if(req.user) {
+        res.redirect('/vista')
+    } else {
+        res.render('login')
+    }
 })
 
 app.get('/error-login', (req, res) => {
