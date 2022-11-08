@@ -5,7 +5,7 @@ import session from 'express-session'
 import cluster from "cluster"
 import os from 'os'
 
-import minimist from "minimist"
+import parseArgs from 'minimist';
 import { fork } from "child_process"
 
 import dotenv from 'dotenv'
@@ -266,8 +266,8 @@ async function listarMensajesNormalizados() {
     return normalizados
 }
 
-let options = {default: {p: 8080, modo: 'fork'}, alias: {p: 'port', modo: 'm'}}
-let args = minimist(process.argv.slice(2), options)
+const options = { default: { port: 8080, modo: 'fork' }, alias: { p: "port" } };
+const args = parseArgs(process.argv.slice(2), options);
 
 const CPU_CORES = os.cpus().length
 const PORT = args.port || process.env.PORT
