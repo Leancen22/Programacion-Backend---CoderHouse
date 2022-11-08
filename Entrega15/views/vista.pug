@@ -1,0 +1,9 @@
+extends layouts/main
+
+block vista
+    if username
+        div(class="jumbotron")
+            h1(style="color: blue;") Bienvenido #{username}!
+            a(href="/logout" class="btn btn-success mt-3") Desloguear
+    include partials/formulario
+    include partials/chat
