@@ -273,7 +273,7 @@ const CPU_CORES = os.cpus().length
 const PORT = args.port || process.env.PORT
 
 
-if ((args.modo == 'cluster') && (cluster.isPrimary)) {
+if ((args.modo == "cluster") && (cluster.isPrimary)) {
 
     for (let index = 0; index < CPU_CORES; index++) {
         cluster.fork()
@@ -288,6 +288,6 @@ if ((args.modo == 'cluster') && (cluster.isPrimary)) {
     const server = httpServer.listen(PORT, () => {
         console.log(`Runing in port ${PORT} ${process.pid}`)
     })
-    server.on('error', error => console.log('Error al levantar'))
+    server.on('error', error => console.log(`Error al levantar ${error}`))
 }
 
