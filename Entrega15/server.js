@@ -279,10 +279,10 @@ if ((args.modo == "cluster") && (cluster.isPrimary)) {
         cluster.fork()
     }
 
-    // cluster.on('exit', worker => {
-    //     console.log(`Worker ${process.pid} finished`)
-    //     cluster.fork()
-    // })
+    cluster.on('exit', worker => {
+        console.log(`Worker ${process.pid} finished`)
+        cluster.fork()
+    })
 
 } else {
     const server = httpServer.listen(PORT, () => {
