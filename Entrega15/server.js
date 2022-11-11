@@ -272,7 +272,6 @@ const args = parseArgs(process.argv.slice(2), options);
 const CPU_CORES = os.cpus().length
 const PORT = args.port || process.env.PORT
 
-
 if ((args.modo == "cluster") && (cluster.isPrimary)) {
 
     for (let index = 0; index < CPU_CORES; index++) {
