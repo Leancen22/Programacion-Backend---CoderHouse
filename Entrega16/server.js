@@ -2,6 +2,8 @@ import express from "express"
 import cookieParser from "cookie-parser"
 import session from 'express-session'
 
+import compression from "compression"
+
 import cluster from "cluster"
 import os from 'os'
 
@@ -39,6 +41,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 app.use(cookieParser(`${process.env.SECRET}`))
+app.use(compression())
 
 import ContenedorArchivo from './src/Containers/ContainerArchivo.js'
 const mensajesApi = new ContenedorArchivo('./DB/mensajes.json')
