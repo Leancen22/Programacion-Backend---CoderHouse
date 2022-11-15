@@ -34,6 +34,8 @@ const app = express()
 const httpServer = new HttpServer(app)
 const io = new socket(httpServer)
 
+import { logger, Ruta, NoImplementada } from "./utils/logger.config.js"
+
 import processRouter from './src/routers/process.router.js'
 
 app.use('/', processRouter)
@@ -223,11 +225,19 @@ app.get('/logout_timeout', (req, res) => {
 
 app.post('/productos', async (req, res) => {
     try {
+        Ruta(req)
         await ProductoDao.guardar({...req.body})
         res.redirect('/vista')
     } catch (error) {
-        console.log(error)
+        logger.error(`Ha ocurrido un error ${error}`)
     }
+})
+
+app.get('*', (req, res) => {
+    let ruta = req.url
+    // logger.warn(`Ruta ${ruta} con metodo ${req.method} no implementada`)
+    NoImplementada(req)
+    res.send('ruta no implementada')
 })
 
 const schemaAuthor = new schema.Entity('author', {}, {idAttribute: 'email'})
@@ -253,6 +263,7 @@ io.on('connection', async (socket) => {
         mensaje.fyh = new Date().toLocaleString()
         await mensajesApi.guardar(mensaje)
         console.log(mensaje)
+        logger.error(`Ha ocurrido un error en mensajes`)
         io.sockets.emit('mensajes', await listarMensajesNormalizados())
         //socket.emit('mensajes', await mensajesApi.listarAll())
     })
@@ -288,8 +299,8 @@ if ((args.modo == "cluster") && (cluster.isPrimary)) {
 
 } else {
     const server = httpServer.listen(PORT, () => {
-        console.log(`Runing in port ${PORT} ${process.pid}`)
+        logger.info(`Runing in port ${PORT} ${process.pid}`)
     })
-    server.on('error', error => console.log(`Error al levantar ${error}`))
+    server.on('error', error => logger.error(`Error al levantar ${error}`))
 }
 
