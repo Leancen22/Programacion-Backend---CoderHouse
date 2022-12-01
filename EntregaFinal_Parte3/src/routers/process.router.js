@@ -4,7 +4,7 @@ const processRouter = express.Router()
 import compression from 'compression'
 
 import {fork} from 'child_process'
-const forkProcess = fork('./src/routers/randoms.js')
+const forkProcess = fork('./utils/randoms.js')
 
 processRouter.get('/info', compression(), (req, res) => {
     let datos = {
@@ -37,7 +37,7 @@ processRouter.get('/api/randoms', (req, res) => {
     let cant = 100000000;
     if (req.query.cant) cant = req.query.cant;
 
-    const forkProcess= fork('./src/routers/randoms.js');
+    const forkProcess= fork('./utils/randoms.js');
 
     //Espera la bandera del archivo que se ejecuta en paralelo, mientras no la encuentre envia los numeros, recibidos de randoms.js al front, cuando lo recibe manda cant al proceso.
     forkProcess.on('message', msg => {

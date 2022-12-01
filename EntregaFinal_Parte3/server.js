@@ -1,19 +1,22 @@
 import express from "express"
 import cookieParser from "cookie-parser"
 import session from 'express-session'
-
 import compression from "compression"
-
 import cluster from "cluster"
 import os from 'os'
-
 import parseArgs from 'minimist';
 import { fork } from "child_process"
+import bcrypt from 'bcrypt';
+import {normalize, schema} from "normalizr";
 
 import dotenv from 'dotenv'
 dotenv.config()
 
-import bcrypt from 'bcrypt';
+import {faker} from "@faker-js/faker";
+faker.locale = 'es'
+
+import FileStoreLib from 'session-file-store'
+const FileStore = FileStoreLib(session)
 
 import passport from "passport";
 import { Strategy } from "passport-local";
@@ -22,35 +25,27 @@ const LocalStrategy = Strategy;
 import {Server as HttpServer} from 'http'
 import {Server as socket} from "socket.io";
 
-import {normalize, schema} from "normalizr";
-
-import {faker} from "@faker-js/faker";
-faker.locale = 'es'
-
-import FileStoreLib from 'session-file-store'
-const FileStore = FileStoreLib(session)
 
 const app = express()
 const httpServer = new HttpServer(app)
 const io = new socket(httpServer)
 
 import { logger, Ruta, NoImplementada } from "./utils/logger.config.js"
-
 import processRouter from './src/routers/process.router.js'
-import carritosRouter from "./src/routers/carritos.router.js"
+import testProductos from "./src/routers/test_productos.router.js"
+import ContenedorArchivo from './src/Containers/ContainerArchivo.js'
+import {ProductoDao, UsuarioDao, CarritoDao} from "./src/index.js";
 
 app.use('/', processRouter)
-//app.use('/carrito', carritosRouter)
+app.use('/api/productos_test', testProductos)
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 app.use(cookieParser(`${process.env.SECRET}`))
 app.use(compression())
 
-import ContenedorArchivo from './src/Containers/ContainerArchivo.js'
 const mensajesApi = new ContenedorArchivo('./DB/mensajes.json')
 
-import {ProductoDao, UsuarioDao, CarritoDao} from "./src/index.js";
 
 app.set('views', './views')
 app.set('view engine', 'pug')
@@ -144,22 +139,6 @@ app.get('/vista', isAuth, async (req, res) => {
     } else {
         res.redirect('/login')
     }
-})
-
-app.get('/api/productos-test', (req, res) => {
-    const CANT_PROD = 5
-    const productos = []
-    for (let index = 1; index <= CANT_PROD; index ++) {
-        const prod = {
-            id: index,
-            title: faker.commerce.product(),
-            price: faker.commerce.price(),
-            thumbnail: `${faker.image.imageUrl()}?${index}`
-        }
-        productos.push(prod)
-    }
-    console.log(productos)
-    res.render('productos', {productos})
 })
 
 /*---------------------------------------------------*/
@@ -262,6 +241,18 @@ app.post('/carrito/productos', async (req, res) => {
     } catch (error) {
         res.json({code: 500, msg: `Error al agregar producto al carrito ${error}`})
     }
+})
+
+app.delete('/carrito/productos/:id', async (req, res) => {
+    const id_producto = req.params.id
+    const email = req.user.email
+
+    console.log(id_producto, email)
+
+    if (id_producto) {
+        await CarritoDao.deleteProducto(email, id_producto)
+    }
+    res.end()
 })
 
 

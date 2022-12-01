@@ -28,6 +28,14 @@ class CarritosDaoMongo extends ContainerMongo {
         }
     }
 
+    async deleteProducto(email, id) {
+        try {
+          await this.collecion.updateOne({ email }, { $pull: { productos: { id } } });
+        } catch (error) {
+          logError(error);
+        }
+    }
+
 }
 
 export default CarritosDaoMongo
