@@ -1,0 +1,29 @@
+2022/11/06 22:29:28 [error] 106040#69620: *1 CreateFile() "C:\nginx-1.23.2/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2022/11/06 23:02:29 [emerg] 19540#96732: unknown directive "server_name:" in C:\nginx-1.23.2/conf/nginx.conf:134
+2022/11/06 23:02:49 [emerg] 111972#63960: unknown directive "server_name:" in C:\nginx-1.23.2/conf/nginx.conf:134
+2022/11/06 23:15:10 [emerg] 35064#76372: invalid parameter "weight" in C:\nginx-1.23.2/conf/nginx.conf:129
+2022/11/06 23:15:10 [alert] 68596#83064: worker process 35064 exited with code 1
+2022/11/06 23:15:10 [alert] 68596#83064: could not respawn worker
+2022/11/06 23:16:05 [emerg] 152764#152984: invalid parameter "weight" in C:\nginx-1.23.2/conf/nginx.conf:129
+2022/11/07 10:55:09 [emerg] 127836#77976: invalid URL prefix in C:\nginx-1.23.2/conf/nginx.conf:138
+2022/11/07 10:55:20 [emerg] 69372#77700: invalid URL prefix in C:\nginx-1.23.2/conf/nginx.conf:138
+2022/11/07 10:55:36 [emerg] 33516#103128: invalid URL prefix in C:\nginx-1.23.2/conf/nginx.conf:138
+2022/11/07 10:56:50 [emerg] 91216#73256: invalid URL prefix in C:\nginx-1.23.2/conf/nginx.conf:138
+2022/11/07 10:56:52 [emerg] 55360#29808: invalid URL prefix in C:\nginx-1.23.2/conf/nginx.conf:138
+2022/11/07 11:10:57 [emerg] 13564#28032: invalid URL prefix in C:\nginx-1.23.2/conf/nginx.conf:138
+2022/11/07 11:10:59 [emerg] 28540#26432: invalid URL prefix in C:\nginx-1.23.2/conf/nginx.conf:138
+2022/11/07 11:12:13 [error] 8008#3644: *1 "C:\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
+2022/11/07 11:12:14 [error] 8008#3644: *1 CreateFile() "C:\nginx-1.23.2/../nodeServer/public/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2022/11/07 11:12:37 [error] 8008#3644: *1 "C:\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
+2022/11/07 11:12:38 [error] 8008#3644: *1 "C:\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
+2022/11/07 11:12:38 [error] 8008#3644: *1 "C:\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
+2022/11/07 11:12:38 [error] 8008#3644: *1 "C:\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
+2022/11/07 11:12:38 [error] 8008#3644: *1 "C:\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
+2022/11/07 11:12:38 [error] 8008#3644: *1 "C:\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
+2022/11/07 11:14:54 [error] 18952#25828: *1 "C:\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
+2022/11/07 11:15:35 [error] 18952#25828: *1 "C:\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
+2022/11/07 11:35:43 [notice] 18952#21204: signal process started
+2022/11/07 11:35:43 [error] 18952#21204: OpenEvent("Global\ngx_reload_24200") failed (2: The system cannot find the file specified)
+2022/11/07 11:49:48 [error] 18840#17496: *1 "C:\Users\Leandro Mesa\Desktop\CoderHouse Curso Backend\Entrega15\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
+2022/11/07 11:51:42 [error] 18840#17496: *3 "C:\Users\Leandro Mesa\Desktop\CoderHouse Curso Backend\Entrega15\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
+2022/11/07 11:51:43 [error] 18840#17496: *3 "C:\Users\Leandro Mesa\Desktop\CoderHouse Curso Backend\Entrega15\nginx-1.23.2/../nodeServer/public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost:8080"
