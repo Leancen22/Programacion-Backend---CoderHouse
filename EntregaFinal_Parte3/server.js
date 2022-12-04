@@ -173,7 +173,7 @@ app.post('/registro', async (req, res) => {
     const {username, password, email, telefono, edad, direccion, avatar} = req.body
 
     //const email = req.user.email
-    const carrito = await CarritoDao.listarUno({ email })
+    //const carrito = await CarritoDao.listarUno({ email })
 
     const usuarios = await UsuarioDao.listarAll()
     const usuario = usuarios.find(usr => usr.email == email)
@@ -181,10 +181,10 @@ app.post('/registro', async (req, res) => {
         res.redirect('/error-registro')
     } else {
         await UsuarioDao.guardar({username, password: await generateHashPassword(password), email, telefono, edad, direccion, avatar})
-        if (carrito == null) {
-            await CarritoDao.guardar({email, productos: []})  
-        }
+        await CarritoDao.guardar({email, productos: []})  
+        const carrito = await CarritoDao.listarUno({ email })
         await enviarEmail(req.body)
+        console.log(carrito.length)
         res.redirect('/login')
     }
 })
@@ -221,7 +221,6 @@ app.get('/carrito', isAuth, async (req, res) => {
 
     if (carrito) {
         res.render('carrito', {valores_carrito})
-
     }
     console.log(carrito, carrito.productos.length)
 
