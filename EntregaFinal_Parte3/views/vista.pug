@@ -24,6 +24,10 @@ block vista
                     b Precio
                 input(id="price" class="form-control" name="price" type="number")
             div(class="form-group")
+                label(for="categoria")
+                    b Categoria
+                input(id="categoria" class="form-control" name="categoria" type="text")
+            div(class="form-group")
                 label(for="thumbnail")
                     b Foto URL
                 input(id="thumbnail" class="form-control" name="thumbnail" type="text")
@@ -35,15 +39,18 @@ block vista
                 div(class="table-header")
                     p Nombre
                     p Precio
+                    p Categoria
                     p Foto
                     p Acciones
                 each producto in productos
                     div(class="producto")    
                         p=producto.title
                         p=producto.price
+                        p=producto.categoria
                         div(class="img-container")
                             img(src=producto.thumbnail width="30")
-                        button(data-id=producto._id class="agregar") Agregar al Carrito
+                        button(data-id=producto._id class="agregar btn btn-success mt-3") Agregar al Carrito
+                        button(data-id=producto._id class="eliminar btn btn-danger mt-3") Eliminar del Carrito
         else 
             h3(class="alert alert-warning") No hay productos
     include partials/chat

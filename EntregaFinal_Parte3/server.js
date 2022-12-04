@@ -8,6 +8,7 @@ import parseArgs from 'minimist';
 import { fork } from "child_process"
 import bcrypt from 'bcrypt';
 import {normalize, schema} from "normalizr";
+import nodemailer from 'nodemailer'
 
 import dotenv from 'dotenv'
 dotenv.config()
@@ -35,6 +36,8 @@ import processRouter from './src/routers/process.router.js'
 import testProductos from "./src/routers/test_productos.router.js"
 import ContenedorArchivo from './src/Containers/ContainerArchivo.js'
 import {ProductoDao, UsuarioDao, CarritoDao} from "./src/index.js";
+
+import {enviarEmail, enviarEmailCompra, sendMensajeCompra} from './utils/mensajes.js'
 
 app.use('/', processRouter)
 app.use('/api/productos_test', testProductos)
@@ -84,7 +87,7 @@ const MongoStore = connectMongo.create({
     ttl: 60
 })
 
-app.use(session({
+app.use(session({   
     store: MongoStore,
     secret: process.env.SECRET,
     resave: false,
@@ -169,12 +172,19 @@ app.get('/registro', (req, res) => {
 app.post('/registro', async (req, res) => {
     const {username, password, email, telefono, edad, direccion, avatar} = req.body
 
+    //const email = req.user.email
+    const carrito = await CarritoDao.listarUno({ email })
+
     const usuarios = await UsuarioDao.listarAll()
     const usuario = usuarios.find(usr => usr.email == email)
     if (usuario) {
         res.redirect('/error-registro')
     } else {
         await UsuarioDao.guardar({username, password: await generateHashPassword(password), email, telefono, edad, direccion, avatar})
+        if (carrito == null) {
+            await CarritoDao.guardar({email, productos: []})  
+        }
+        await enviarEmail(req.body)
         res.redirect('/login')
     }
 })
@@ -202,29 +212,20 @@ app.get('/logout_timeout', (req, res) => {
 
 /* ----------------- carrito ---------------- */
 
-// const generarCarrito = async req => {
-//     if (!req.isAuthenticated()) return [];
-
-//     const email = req.user.email;
-//     const carrito = await CarritoDao.listarUno({ email });
-//     return carrito
-//       ? carrito.productos
-//       : carrito;
-//   };
-
 app.get('/carrito', isAuth, async (req, res) => {
 
     const email = req.user.email
     const carrito = await CarritoDao.listarUno({ email })
 
-    if (carrito == null) {
-        await CarritoDao.guardar({email, productos: []})  
+    const valores_carrito = carrito.productos
+
+    if (carrito) {
+        res.render('carrito', {valores_carrito})
+
     }
     console.log(carrito, carrito.productos.length)
 
-    const valores_carrito = carrito.productos
 
-    res.render('carrito', {valores_carrito})
 })
 
 app.post('/carrito', async (req, res) => {
@@ -255,8 +256,25 @@ app.delete('/carrito/productos/:id', async (req, res) => {
     res.end()
 })
 
+/* Manda mensajes al finalizar compra*/
+app.post('/carrito/compra_finalizada', async (req, res) => {
 
-/*---------------------------------------------------*/
+    const usuario = req.user.username
+    const email = req.user.email
+
+    const user = req.user
+
+    const carrito = await CarritoDao.listarUno({email})
+    if (carrito != null) {
+        await enviarEmailCompra(user, carrito)
+        await sendMensajeCompra(user, carrito)
+        await CarritoDao.borrarTodosLosProductos(email)
+    }
+    console.log(usuario, email, carrito.productos)
+})
+
+
+/*----------------------- Productos ----------------------------*/
 
 app.post('/productos', async (req, res) => {
     try {
@@ -267,6 +285,23 @@ app.post('/productos', async (req, res) => {
         logger.error(`Ha ocurrido un error ${error}`)
     }
 })
+
+app.get('/productos/:categoria', async (req, res) => {
+    const categoria_producto = req.params.categoria
+    
+    const productos = await ProductoDao.listarAllObj(categoria_producto)
+
+    const productos_especificos = productos.filter(prod => prod.categoria == categoria_producto)
+
+    if (productos_especificos != null) {
+        res.json(productos_especificos)
+    } else {
+        res.send('No hay productos con esa categoria')
+    }
+
+})
+
+/*--------------------------------------------------------------*/
 
 app.get('*', (req, res) => {
     let ruta = req.url
@@ -319,7 +354,7 @@ const options = { default: { port: 8080, modo: 'fork' }, alias: { p: "port" } };
 const args = parseArgs(process.argv.slice(2), options);
 
 const CPU_CORES = os.cpus().length
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 7080
 //process.env.PORT || 5000 args.port || process.env.PORT
 
 if ((args.modo == "cluster") && (cluster.isPrimary)) {

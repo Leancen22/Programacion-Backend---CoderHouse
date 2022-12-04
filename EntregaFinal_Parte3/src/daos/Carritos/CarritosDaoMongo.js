@@ -36,6 +36,14 @@ class CarritosDaoMongo extends ContainerMongo {
         }
     }
 
+    async borrarTodosLosProductos(email) {
+        try {
+          await this.collecion.updateOne({ email }, { $set: { productos: [] } });
+        } catch (error) {
+          logError(error);
+        }
+    }
+
 }
 
 export default CarritosDaoMongo

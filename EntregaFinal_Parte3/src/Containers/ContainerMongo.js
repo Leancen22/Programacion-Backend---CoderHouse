@@ -35,6 +35,10 @@ class ContainerMongo {
         return await this.collecion.find({})
     }
 
+    async listarAllObj(obj) {
+        return await this.collecion.find({obj})
+    }
+
     async actualizar(id, nuevoElem) {
         return this.collecion.updateOne({'_id': id}, {$set: nuevoElem})
     }

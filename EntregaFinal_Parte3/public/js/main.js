@@ -1,26 +1,26 @@
 const socket = io.connect()
 
-// socket.on('from-server-mensajes', mensajes => {
-//     console.log(mensajes)
-//     render(mensajes)
-// })
+socket.on('from-server-mensajes', mensajes => {
+    console.log(mensajes)
+    render(mensajes)
+})
 
 // socket.on('from-server-productos', productos => {
 //     console.log(productos)
 //     render_productos(productos)
 // })
 //
-// function render(mensajes) {
-//
-//     const cuerpoMensajesHTML = mensajes.map(msj => {
-//         return `
-//             <span><b style="color: blue;">${msj.user}</b> <span style="color: brown;">[${msj.fecha_actual}]</span>:</span><span style="color: green; font-style: italic;"> ${msj.mensaje}</span>
-//         `
-//     }).join('<br>')
-//
-//     document.querySelector('#historialChat').innerHTML = cuerpoMensajesHTML
-//
-// }
+function render(mensajes) {
+
+    const cuerpoMensajesHTML = mensajes.map(msj => {
+        return `
+            <span><b style="color: blue;">${msj.user}</b> <span style="color: brown;">[${msj.fecha_actual}]</span>:</span><span style="color: green; font-style: italic;"> ${msj.mensaje}</span>
+        `
+    }).join('<br>')
+
+    document.querySelector('#historialChat').innerHTML = cuerpoMensajesHTML
+
+}
 //
 // function render_productos(productos) {
 //     const cuerpoMensajesHTML = productos.map(prod => {
@@ -42,33 +42,55 @@ const socket = io.connect()
 
 
 
+//Agrega productos al carrito
 
 
+const producto_especifico = document.querySelectorAll('.agregar')
+producto_especifico.forEach( (btn) => {
+    btn.addEventListener('click', async (e) => {             
 
-    const producto_especifico = document.querySelectorAll('.agregar')
-    producto_especifico.forEach( (btn) => {
-        btn.addEventListener('click', async (e) => {             
+        const producto = {
+            id: e.target.dataset.id,
+            title: e.target.parentElement.children[0].textContent,
+            price: e.target.parentElement.children[1].textContent,
+            categoria: e.target.parentElement.children[2].textContent,
+            thumbnail: e.target.parentElement.querySelector('img').src,
+            cantidad: 1
+        };
 
-            const producto = {
-                id: e.target.dataset.id,
-                title: e.target.parentElement.children[0].textContent,
-                price: e.target.parentElement.children[1].textContent,
-                thumbnail: e.target.parentElement.querySelector('img').src,
-                cantidad: 1
-            };
+        await fetch('/carrito/productos', {
+            method: 'POST',
+            body: JSON.stringify(producto),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
 
-            await fetch('/carrito/productos', {
-                method: 'POST',
-                body: JSON.stringify(producto),
-                headers: {
-                  'Content-Type': 'application/json',
-                }
-            });
-
-        })
     })
+})
+
+//Elimina productos del carrito
+
+const producto_eliminar = document.querySelectorAll('.eliminar')
+producto_eliminar.forEach( (btn) => {
+    btn.addEventListener('click', async (e) => {             
+
+        await fetch(`/carrito/productos/${e.target.dataset.id}`, {
+            method: 'DELETE',
+        });
+
+    })
+})
 
 
+//Enviar mensaje al finalizar compra
+
+const finalizarCompra = document.querySelector('.comprar')
+finalizarCompra.addEventListener('click', async () => {
+    await fetch('/carrito/compra_finalizada', {
+        method: 'POST'
+    })
+})
 
 
 
