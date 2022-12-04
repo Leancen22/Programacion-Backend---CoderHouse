@@ -285,12 +285,12 @@ app.post('/productos', async (req, res) => {
     }
 })
 
-app.get('/productos/:categoria', async (req, res) => {
-    const categoria_producto = req.params.categoria
+app.post('/productos_categoria', async (req, res) => {
+    const {categoria} = req.body
     
-    const productos = await ProductoDao.listarAllObj(categoria_producto)
+    const productos = await ProductoDao.listarAllObj(categoria)
 
-    const productos_especificos = productos.filter(prod => prod.categoria == categoria_producto)
+    const productos_especificos = productos.filter(prod => prod.categoria == categoria)
 
     if (productos_especificos != null) {
         res.json(productos_especificos)

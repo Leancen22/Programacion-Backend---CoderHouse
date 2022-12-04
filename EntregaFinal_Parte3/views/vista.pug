@@ -35,6 +35,13 @@ block vista
         hr
         h2(style="color: crimson;") Lista de Productos
         if productos.length
+            form(action="/productos_categoria" method="post")
+                div(class="form-group")
+                    label(for="categoria")
+                        b Filtro por categoria
+                    input(id="categoria" class="form-control" name="categoria" type="text")
+                button(class="btn btn-success mt-3 mb-5 btn-block") Filtrar
+
             div(class="table-container")
                 div(class="table-header")
                     p Nombre
