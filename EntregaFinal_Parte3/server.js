@@ -269,7 +269,7 @@ app.post('/carrito/compra_finalizada', async (req, res) => {
         await sendMensajeCompra(user, carrito)
         await CarritoDao.borrarTodosLosProductos(email)
     }
-    console.log(usuario, email, carrito.productos)
+    //console.log(usuario, email, carrito.productos)
 })
 
 

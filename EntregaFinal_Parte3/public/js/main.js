@@ -42,12 +42,17 @@ function render(mensajes) {
 
 
 
-//Agrega productos al carrito
+//Agrega productos al carrito y devuelve feedback
 
 
 const producto_especifico = document.querySelectorAll('.agregar')
 producto_especifico.forEach( (btn) => {
     btn.addEventListener('click', async (e) => {             
+
+        btn.textContent = "Producto agregado"
+        setTimeout(() => {
+            btn.textContent = "Agregar al Carrito"
+        }, 2000);
 
         const producto = {
             id: e.target.dataset.id,
@@ -87,9 +92,13 @@ producto_eliminar.forEach( (btn) => {
 
 const finalizarCompra = document.querySelector('.comprar')
 finalizarCompra.addEventListener('click', async () => {
+
+    finalizarCompra.textContent = 'Compra realizada!'
+
     await fetch('/carrito/compra_finalizada', {
         method: 'POST'
     })
+
 })
 
 
