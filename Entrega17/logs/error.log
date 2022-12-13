@@ -1,0 +1,30 @@
+[2022-11-14T22:11:36.972] [ERROR] default - Ha ocurrido un error ValidationError: title: Path `title` is required., price: Path `price` is required., thumbnail: Path `thumbnail` is required.
+[2022-11-14T22:16:23.523] [ERROR] default - Ha ocurrido un error en mensajes
+[2022-11-14T22:16:56.331] [ERROR] default - Ha ocurrido un error en mensajes
+[2022-11-23T20:05:55.750] [ERROR] default - Ha ocurrido un error en mensajes
+[2022-12-03T23:10:57.820] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::5000
+[2022-12-03T23:11:28.922] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::6000
+[2022-12-03T23:11:37.543] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7000
+[2022-12-03T23:29:27.522] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7000
+[2022-12-03T23:37:23.097] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7000
+[2022-12-03T23:38:50.618] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7000
+[2022-12-03T23:40:27.786] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7000
+[2022-12-03T23:40:33.089] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7000
+[2022-12-04T01:17:18.132] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7000
+[2022-12-04T01:17:37.330] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7070
+[2022-12-04T01:17:51.255] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7071
+[2022-12-04T01:23:21.749] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7071
+[2022-12-04T01:28:44.148] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7071
+[2022-12-04T01:29:02.447] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7072
+[2022-12-04T01:32:24.190] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7072
+[2022-12-04T01:37:52.636] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7072
+[2022-12-04T01:41:29.849] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7072
+[2022-12-04T01:42:08.307] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7072
+[2022-12-04T01:44:14.964] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7072
+[2022-12-04T01:45:36.070] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7072
+[2022-12-04T01:46:24.920] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7072
+[2022-12-04T01:46:37.446] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7073
+[2022-12-04T01:46:49.142] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::7080
+[2022-12-04T01:48:12.166] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::8081
+[2022-12-04T01:50:16.461] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::8081
+[2022-12-04T15:32:27.467] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::8081
