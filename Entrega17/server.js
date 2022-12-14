@@ -36,8 +36,10 @@ import testProductos from "./src/routers/test_productos.router.js"
 import ContenedorArchivo from './src/Containers/ContainerArchivo.js'
 import {ProductoDao, UsuarioDao, CarritoDao} from "./src/index.js";
 
-import {enviarEmail, enviarEmailCompra, sendMensajeCompra} from './utils/mensajes.js'
+import {enviarEmail} from './utils/mensajes.js'
 import productosRouter from "./src/routers/productos.router.js"
+import carritosRouter from "./src/routers/carrito.router.js"
+import indexRouter from "./src/routers/indexRouter.js"
 
 
 app.use(express.json())
@@ -104,9 +106,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', processRouter)
+app.use('/', indexRouter)
+app.use('/process', processRouter)
 app.use('/api/productos_test', testProductos)
 app.use('/productos', productosRouter)
+app.use('/carrito', carritosRouter)
 
 async function generateHashPassword(password){
     const hashPassword = await bcrypt.hash(password, 10);
@@ -133,22 +137,22 @@ app.get('/', async (req, res) => {
     res.redirect('/login')
 })
 
-app.get('/vista', isAuth, async (req, res) => {
+// app.get('/vista', isAuth, async (req, res) => {
 
-    const username = req.user.username
-    const email = req.user.email
-    const avatar = req.user.avatar
+//     const username = req.user.username
+//     const email = req.user.email
+//     const avatar = req.user.avatar
 
-    if (req.user) {
+//     if (req.user) {
 
-        const productos = await ProductoDao.listarAll();
+//         const productos = await ProductoDao.listarAll();
 
-        console.log(req.user)
-        res.render('vista', {username, email, avatar, productos})
-    } else {
-        res.redirect('/login')
-    }
-})
+//         console.log(req.user)
+//         res.render('vista', {username, email, avatar, productos})
+//     } else {
+//         res.redirect('/login')
+//     }
+// })
 
 /*---------------------------------------------------*/
 
@@ -215,98 +219,6 @@ app.get('/logout', (req, res) => {
 app.get('/logout_timeout', (req, res) => {
     res.render('logout_timeout', {})
 })
-
-/* ----------------- carrito ---------------- */
-
-app.get('/carrito', isAuth, async (req, res) => {
-
-    const email = req.user.email
-    const carrito = await CarritoDao.listarUno({ email })
-
-    const valores_carrito = carrito.productos
-
-    if (carrito) {
-        res.render('carrito', {valores_carrito})
-    }
-    console.log(carrito, carrito.productos.length)
-
-
-})
-
-app.post('/carrito', async (req, res) => {
-    await CarritoDao.guardar({productos: []})
-    res.json({code: 201, msg: 'Nuevo producto agregado'})
-})
-
-app.post('/carrito/productos', async (req, res) => {
-    try {
-        console.log(req.body)
-        const producto = req.body
-        const email = req.user.email
-        await CarritoDao.agregarProducto(email, producto)
-    } catch (error) {
-        res.json({code: 500, msg: `Error al agregar producto al carrito ${error}`})
-    }
-})
-
-app.delete('/carrito/productos/:id', async (req, res) => {
-    const id_producto = req.params.id
-    const email = req.user.email
-
-    console.log(id_producto, email)
-
-    if (id_producto) {
-        await CarritoDao.deleteProducto(email, id_producto)
-    }
-    res.end()
-})
-
-/* Manda mensajes al finalizar compra*/
-app.post('/carrito/compra_finalizada', async (req, res) => {
-
-    const usuario = req.user.username
-    const email = req.user.email
-
-    const user = req.user
-
-    const carrito = await CarritoDao.listarUno({email})
-    if (carrito != null) {
-        await enviarEmailCompra(user, carrito)
-        await sendMensajeCompra(user, carrito)
-        await CarritoDao.borrarTodosLosProductos(email)
-    }
-    //console.log(usuario, email, carrito.productos)
-})
-
-
-/*----------------------- Productos ----------------------------*/
-
-// app.post('/productos', async (req, res) => {
-//     try {
-//         Ruta(req)
-//         await ProductoDao.guardar({...req.body})
-//         res.redirect('/vista')
-//     } catch (error) {
-//         logger.error(`Ha ocurrido un error ${error}`)
-//     }
-// })
-
-// app.post('/productos_categoria', async (req, res) => {
-//     const {categoria} = req.body
-    
-//     const productos = await ProductoDao.listarAllObj(categoria)
-
-//     const productos_especificos = productos.filter(prod => prod.categoria == categoria)
-
-//     if (productos_especificos != null) {
-//         res.json(productos_especificos)
-//     } else {
-//         res.send('No hay productos con esa categoria')
-//     }
-
-// })
-
-/*--------------------------------------------------------------*/
 
 app.get('*', (req, res) => {
     let ruta = req.url

@@ -64,10 +64,7 @@
 import { Router } from "express"
 const productosRouter = Router()
 
-import ProductosDaoMongo from "../daos/Productos/ProductosDaoMongo.js"
 import { guardar_producto, listar_categoria } from "../Controllers/productos.controller.js"
-
-let api = ProductosDaoMongo.getInstance()
 
 productosRouter.post('/', guardar_producto)
 
