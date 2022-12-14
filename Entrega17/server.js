@@ -112,11 +112,6 @@ app.use('/api/productos_test', testProductos)
 app.use('/productos', productosRouter)
 app.use('/carrito', carritosRouter)
 
-async function generateHashPassword(password){
-    const hashPassword = await bcrypt.hash(password, 10);
-    return hashPassword;
-}
-
 async function verifyPass(username, password) {
     const match = await bcrypt.compare(password, username.password);
     console.log(`pass login: ${password} || pass hash: ${ username.password}`)
@@ -133,92 +128,7 @@ function isAuth(req, res, next) {
 
 /*--------------------------------------------------------------------------------------------*/
 
-app.get('/', async (req, res) => {
-    res.redirect('/login')
-})
-
-// app.get('/vista', isAuth, async (req, res) => {
-
-//     const username = req.user.username
-//     const email = req.user.email
-//     const avatar = req.user.avatar
-
-//     if (req.user) {
-
-//         const productos = await ProductoDao.listarAll();
-
-//         console.log(req.user)
-//         res.render('vista', {username, email, avatar, productos})
-//     } else {
-//         res.redirect('/login')
-//     }
-// })
-
-/*---------------------------------------------------*/
-
-
-app.get('/login', (req, res) => {
-    if(req.user) {
-        res.redirect('/vista')
-    } else {
-        res.render('login')
-    }
-})
-
-app.get('/error-login', (req, res) => {
-    res.render('error-login')
-})
-
-app.get('/error-registro', (req, res) => {
-    res.render('error-registro')
-})
-
 app.post('/login', passport.authenticate('local',  {successRedirect: '/vista', failureRedirect: '/error-login'} ));
-
-app.get('/registro', (req, res) => {
-    res.render('registro')
-})
-
-app.post('/registro', async (req, res) => {
-    const {username, password, email, telefono, edad, direccion, avatar} = req.body
-
-    //const email = req.user.email
-    //const carrito = await CarritoDao.listarUno({ email })
-
-    const usuarios = await UsuarioDao.listarAll()
-    const usuario = usuarios.find(usr => usr.email == email)
-    if (usuario) {
-        res.redirect('/error-registro')
-    } else {
-        await UsuarioDao.guardar({username, password: await generateHashPassword(password), email, telefono, edad, direccion, avatar})
-        await CarritoDao.guardar({email, productos: []})  
-        const carrito = await CarritoDao.listarUno({ email })
-        await enviarEmail(req.body)
-        console.log(carrito.length)
-        res.redirect('/login')
-    }
-})
-
-//
-// app.get('/privado', auth, (req, res) => {
-//     res.send('Se encuentra loguado')
-// })
-//
-app.get('/logout', (req, res) => {
-    const username = req.session.username
-    req.session.destroy(err => {
-        if(err) {
-            res.json({err})
-        } else {
-            res.render('login')
-        }
-    })
-
-})
-
-app.get('/logout_timeout', (req, res) => {
-    res.render('logout_timeout', {})
-})
 
 app.get('*', (req, res) => {
     let ruta = req.url
