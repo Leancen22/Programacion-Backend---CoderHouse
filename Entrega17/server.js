@@ -34,9 +34,9 @@ import { logger, Ruta, NoImplementada } from "./utils/logger.config.js"
 import processRouter from './src/routers/process.router.js'
 import testProductos from "./src/routers/test_productos.router.js"
 
-import ContenedorArchivo from './src/Containers/ContainerArchivo.js'
-
-import {ProductoDao, UsuarioDao} from "./src/index.js";
+//import ContenedorArchivo from './src/Containers/ContainerArchivo.js'
+import UsuariosDaosMongo from "./src/daos/Usuarios/UsuariosDaosMongo.js"
+let api_usuario = UsuariosDaosMongo.getInstance()
 
 import productosRouter from "./src/routers/productos.router.js"
 import carritosRouter from "./src/routers/carrito.router.js"
@@ -53,7 +53,7 @@ app.use(express.static('public'))
 app.use(compression())
 app.use(bodyParser.json());
 
-const mensajesApi = new ContenedorArchivo('./DB/mensajes.json')
+//const mensajesApi = new ContenedorArchivo('./DB/mensajes.json')
 
 app.set('views', './views')
 app.set('view engine', 'pug')
@@ -69,7 +69,7 @@ passport.serializeUser((usuario, done) => {
 })
 
 passport.deserializeUser(async (nombre, done) => {
-    const usuarios = await UsuarioDao.listarAll()
+    const usuarios = await api_usuario.listarAll()
     const usuario = usuarios.find(usr => usr.username == nombre)
     done(null, usuario)
 })
@@ -107,9 +107,12 @@ app.use('/carrito', carritosRouter)
 
 /*--------------------------------------------------------------------------------------------*/
 
+//Aun debe cambiarse
 app.post('/login', passport.authenticate('local',  {successRedirect: '/vista', failureRedirect: '/error-login'} ));
 
-app.get('/*', (req, res) => {
+
+//Ruta para excepciones
+app.get('*', (req, res) => {
     let ruta = req.url
     // logger.warn(`Ruta ${ruta} con metodo ${req.method} no implementada`)
     NoImplementada(req)
