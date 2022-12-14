@@ -24,4 +24,5 @@ indexRouter.get('/logout_timeout', logout_timeout)
 
 indexRouter.get('/', redirect_login)
 
+
 export default indexRouter

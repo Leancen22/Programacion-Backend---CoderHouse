@@ -10,17 +10,17 @@ socket.on('from-server-mensajes', mensajes => {
 //     render_productos(productos)
 // })
 //
-function render(mensajes) {
+// function render(mensajes) {
 
-    const cuerpoMensajesHTML = mensajes.map(msj => {
-        return `
-            <span><b style="color: blue;">${msj.user}</b> <span style="color: brown;">[${msj.fecha_actual}]</span>:</span><span style="color: green; font-style: italic;"> ${msj.mensaje}</span>
-        `
-    }).join('<br>')
+//     const cuerpoMensajesHTML = mensajes.map(msj => {
+//         return `
+//             <span><b style="color: blue;">${msj.user}</b> <span style="color: brown;">[${msj.fecha_actual}]</span>:</span><span style="color: green; font-style: italic;"> ${msj.mensaje}</span>
+//         `
+//     }).join('<br>')
 
-    document.querySelector('#historialChat').innerHTML = cuerpoMensajesHTML
+//     document.querySelector('#historialChat').innerHTML = cuerpoMensajesHTML
 
-}
+// }
 //
 // function render_productos(productos) {
 //     const cuerpoMensajesHTML = productos.map(prod => {
