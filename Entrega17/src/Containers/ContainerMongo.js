@@ -1,25 +1,26 @@
 import mongoose from "mongoose";
-import config from "../../config.js";
 
 // const cnxStr = `mongodb://${config.mongo.host}:${config.mongo.port}/${config.mongo.dbName}`
 
-const cnxStr = `mongodb+srv://root:root@cluster0.uitaw.mongodb.net/sessions`
+// const cnxStr = `mongodb+srv://root:root@cluster0.uitaw.mongodb.net/ecommerce`
 
-await mongoose.connect(cnxStr, config.mongo.options)
+// await mongoose.connect(cnxStr, config.mongo.options)
 
 class ContainerMongo {
-    constructor(nombreColeccion, esquema) {
-        this.collecion = mongoose.model(nombreColeccion, esquema)
+    constructor(esquema) {
+        this.collection = esquema
     }
 
     async guardar(objeto) {
-        return await this.collecion.create(objeto)
+        const nuevaColeccion = new this.collection({ ...objeto });
+        await nuevaColeccion.save();
+        return nuevaColeccion;
     }
 
     async listar(id) {
         try {
             if (mongoose.Types.ObjectId.isValid(id)) {
-                const docs = await this.collecion.find({'_id': id}, {__v: 0})
+                const docs = await this.collection.findOne({'_id': id}, {__v: 0})
                 if (docs.length == 0) {
                     throw Error('El producto solicitado no existe')
                 } else {
@@ -32,23 +33,23 @@ class ContainerMongo {
     }
 
     async listarAll() {
-        return await this.collecion.find({})
+        return await this.collection.find({})
     }
 
     async listarAllObj(obj) {
-        return await this.collecion.find({obj})
+        return await this.collection.find({obj})
     }
 
     async actualizar(id, nuevoElem) {
-        return this.collecion.updateOne({'_id': id}, {$set: nuevoElem})
+        return this.collection.updateOne({'_id': id}, {$set: nuevoElem})
     }
 
     async borrar(id) {
-        return await this.collecion.deleteOne({'_id': id})
+        return await this.collection.deleteOne({'_id': id})
     }
 
     async borrarAll() {
-        return await this.collecion.deleteMany({})
+        return await this.collection.deleteMany({})
     }
 }
 

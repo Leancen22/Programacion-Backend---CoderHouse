@@ -1,11 +1,19 @@
 import ContainerMongo from "../../Containers/ContainerMongo.js";
+import CarritosModel from "../../Models/carrito.models.js";
+
+
+let instance = null
 
 class CarritosDaoMongo extends ContainerMongo {
     constructor() {
-        super('carritos', {
-            productos: {type: [], required: true},
-            email: {type: String, require: true}
-        });
+        super(CarritosModel);
+    }
+
+    static getInstance() {
+      if (!instance) {
+        instance = new CarritosDaoMongo()
+      }
+      return instance
     }
 
     async guardar(carrito = { productos: [] }) {

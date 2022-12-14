@@ -1,23 +1,9 @@
-import express from 'express'
-const testProductos = express.Router()
+import {Router} from 'express'
+const testProductos = Router()
 
-import {faker} from "@faker-js/faker";
-faker.locale = 'es'
+import {producto_random} from '../Controllers/test_productos.controller.js'
+import { isAuth } from '../../utils/Authenticated.js'
 
-testProductos.get('/', (req, res) => {
-    const CANT_PROD = 5
-    const productos = []
-    for (let index = 1; index <= CANT_PROD; index ++) {
-        const prod = {
-            id: index,
-            title: faker.commerce.product(),
-            price: faker.commerce.price(),
-            thumbnail: `${faker.image.imageUrl()}?${index}`
-        }
-        productos.push(prod)
-    }
-    console.log(productos)
-    res.render('productos', {productos})
-})
+testProductos.get('/', isAuth, producto_random)
 
 export default testProductos

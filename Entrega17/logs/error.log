@@ -28,3 +28,4 @@
 [2022-12-04T01:48:12.166] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::8081
 [2022-12-04T01:50:16.461] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::8081
 [2022-12-04T15:32:27.467] [ERROR] default - Error al levantar Error: listen EADDRINUSE: address already in use :::8081
+[2022-12-14T14:11:08.151] [ERROR] default - Ha ocurrido un error ReferenceError: Ruta is not defined

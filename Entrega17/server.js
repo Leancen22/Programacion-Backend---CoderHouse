@@ -1,5 +1,4 @@
 import express from "express"
-import cookieParser from "cookie-parser"
 import session from 'express-session'
 import compression from "compression"
 import cluster from "cluster"
@@ -9,15 +8,15 @@ import { fork } from "child_process"
 import bcrypt from 'bcrypt';
 import {normalize, schema} from "normalizr";
 import nodemailer from 'nodemailer'
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import cookieParser from "cookie-parser"
 
 import dotenv from 'dotenv'
 dotenv.config()
 
 import {faker} from "@faker-js/faker";
 faker.locale = 'es'
-
-import FileStoreLib from 'session-file-store'
-const FileStore = FileStoreLib(session)
 
 import passport from "passport";
 import { Strategy } from "passport-local";
@@ -38,14 +37,14 @@ import ContenedorArchivo from './src/Containers/ContainerArchivo.js'
 import {ProductoDao, UsuarioDao, CarritoDao} from "./src/index.js";
 
 import {enviarEmail, enviarEmailCompra, sendMensajeCompra} from './utils/mensajes.js'
+import productosRouter from "./src/routers/productos.router.js"
 
-app.use('/', processRouter)
-app.use('/api/productos_test', testProductos)
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-app.use(cookieParser(`${process.env.SECRET}`))
 app.use(compression())
+app.use(bodyParser.json());
 
 const mensajesApi = new ContenedorArchivo('./DB/mensajes.json')
 
@@ -81,25 +80,33 @@ passport.deserializeUser(async (nombre, done) => {
 })
 
 //Persistencia en mongo
-import connectMongo from 'connect-mongo'
-const MongoStore = connectMongo.create({
-    mongoUrl: process.env.MONGO_ATLAS,
-    ttl: 60
-})
+mongoose.connect(
+    process.env.MONGO_ATLAS, 
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+)
 
+app.use(cookieParser()) 
 app.use(session({   
-    store: MongoStore,
     secret: process.env.SECRET,
-    resave: false,
+    resave: true,
+    rolling: true,
     saveUninitialized: false,
-    cookie: {
-        maxAge: 1000*60 //20 seg
-    },
+    // cookie: {
+    //     httpOnly: false,
+    //     secure: false
+    // },
     //rolling: true
 }))
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/', processRouter)
+app.use('/api/productos_test', testProductos)
+app.use('/productos', productosRouter)
 
 async function generateHashPassword(password){
     const hashPassword = await bcrypt.hash(password, 10);
@@ -127,7 +134,6 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/vista', isAuth, async (req, res) => {
-    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 
     const username = req.user.username
     const email = req.user.email
@@ -137,7 +143,7 @@ app.get('/vista', isAuth, async (req, res) => {
 
         const productos = await ProductoDao.listarAll();
 
-        console.log(productos)
+        console.log(req.user)
         res.render('vista', {username, email, avatar, productos})
     } else {
         res.redirect('/login')
@@ -275,30 +281,30 @@ app.post('/carrito/compra_finalizada', async (req, res) => {
 
 /*----------------------- Productos ----------------------------*/
 
-app.post('/productos', async (req, res) => {
-    try {
-        Ruta(req)
-        await ProductoDao.guardar({...req.body})
-        res.redirect('/vista')
-    } catch (error) {
-        logger.error(`Ha ocurrido un error ${error}`)
-    }
-})
+// app.post('/productos', async (req, res) => {
+//     try {
+//         Ruta(req)
+//         await ProductoDao.guardar({...req.body})
+//         res.redirect('/vista')
+//     } catch (error) {
+//         logger.error(`Ha ocurrido un error ${error}`)
+//     }
+// })
 
-app.post('/productos_categoria', async (req, res) => {
-    const {categoria} = req.body
+// app.post('/productos_categoria', async (req, res) => {
+//     const {categoria} = req.body
     
-    const productos = await ProductoDao.listarAllObj(categoria)
+//     const productos = await ProductoDao.listarAllObj(categoria)
 
-    const productos_especificos = productos.filter(prod => prod.categoria == categoria)
+//     const productos_especificos = productos.filter(prod => prod.categoria == categoria)
 
-    if (productos_especificos != null) {
-        res.json(productos_especificos)
-    } else {
-        res.send('No hay productos con esa categoria')
-    }
+//     if (productos_especificos != null) {
+//         res.json(productos_especificos)
+//     } else {
+//         res.send('No hay productos con esa categoria')
+//     }
 
-})
+// })
 
 /*--------------------------------------------------------------*/
 
