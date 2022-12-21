@@ -75,13 +75,13 @@ passport.deserializeUser(async (nombre, done) => {
 })
 
 //Persistencia en mongo
-mongoose.connect(
-    process.env.MONGO_ATLAS, 
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }
-)
+// mongoose.connect(
+//     process.env.MONGO_ATLAS, 
+//     {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true
+//     }
+// )
 
 app.use(cookieParser()) 
 app.use(session({   

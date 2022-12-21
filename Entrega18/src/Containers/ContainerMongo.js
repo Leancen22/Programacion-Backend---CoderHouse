@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import MongoDBClient from "./ContenedorMongoConnect.js";
+import { config } from "../config/config.js";
 
 // const cnxStr = `mongodb://${config.mongo.host}:${config.mongo.port}/${config.mongo.dbName}`
 
@@ -9,16 +11,29 @@ import mongoose from "mongoose";
 class ContainerMongo {
     constructor(esquema) {
         this.collection = esquema
+        this.conn = MongoDBClient.getInstance()
     }
 
     async guardar(objeto) {
-        const nuevaColeccion = new this.collection({ ...objeto });
-        await nuevaColeccion.save();
-        return nuevaColeccion;
+        try {
+
+            await this.conn.connect()
+
+            const nuevaColeccion = new this.collection({ ...objeto });
+            await nuevaColeccion.save();
+            return nuevaColeccion;
+        } catch (error) {
+            throw new Error(error)
+        } finally {
+            await this.conn.disconnect()
+        }
     }
 
     async listar(id) {
         try {
+
+            await this.conn.connect()
+
             if (mongoose.Types.ObjectId.isValid(id)) {
                 const docs = await this.collection.findOne({'_id': id}, {__v: 0})
                 if (docs.length == 0) {
@@ -29,27 +44,53 @@ class ContainerMongo {
             }
         } catch (error) {
             throw new Error(`Error al listar ${error}`)
+        } finally {
+            await this.conn.disconnect()
         }
     }
 
     async listarAll() {
-        return await this.collection.find({})
+        try {
+            await this.conn.connect()
+
+            return await this.collection.find({})
+        } catch (error) {
+            throw new Error(error)
+        }
     }
 
     async listarAllObj(obj) {
-        return await this.collection.find({obj})
+        try {
+            await this.conn.connect()
+
+            return await this.collection.find({obj})
+        } catch (error) {
+            throw new Error(error)
+        }
     }
 
     async actualizar(id, nuevoElem) {
-        return this.collection.updateOne({'_id': id}, {$set: nuevoElem})
+        try {
+            return this.collection.updateOne({'_id': id}, {$set: nuevoElem})
+        } catch (error) {
+            throw new Error(error)
+        }
     }
 
     async borrar(id) {
-        return await this.collection.deleteOne({'_id': id})
+        try {
+            return await this.collection.deleteOne({'_id': id})
+        } catch (error) {
+            throw new Error(error)
+        }
     }
 
     async borrarAll() {
-        return await this.collection.deleteMany({})
+        try {
+            return await this.collection.deleteMany({})
+        } catch (error) {
+            throw new Error(error)
+        }
     }
 }
 
