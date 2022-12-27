@@ -3,6 +3,14 @@ import { logger, Ruta } from "../../utils/logger.config.js"
 
 let api = ProductosDaoMongo.getInstance()
 
+export const listar_productos = async (req, res) => {
+    try {
+        res.json(await api.listarAll())
+    } catch (error) {
+        logger.error(`Un error a ocurrido al listar ${error} `)
+    }
+}
+
 export const guardar_producto = async (req, res) => {
     try {
         Ruta(req)
