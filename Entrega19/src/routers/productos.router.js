@@ -64,12 +64,16 @@
 import { Router } from "express"
 const productosRouter = Router()
 
-import { guardar_producto, listar_categoria, listar_productos } from "../Controllers/productos.controller.js"
+import { guardar_producto, listar_categoria, listar_productos, borrar_producto, borrar_productos } from "../Controllers/productos.controller.js"
 
 productosRouter.get('/', listar_productos)
 
 productosRouter.post('/', guardar_producto)
 
 productosRouter.post('/productos_categoria', listar_categoria)
+
+productosRouter.delete('/:id', borrar_producto)
+
+productosRouter.delete('/', borrar_productos)
 
 export default productosRouter

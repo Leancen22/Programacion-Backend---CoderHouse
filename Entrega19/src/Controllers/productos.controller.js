@@ -35,3 +35,14 @@ export const listar_categoria = async (req, res) => {
     }
 
 }
+
+export const borrar_producto = async (req, res) => {
+    const id = req.params.id
+    await api.borrar(id)
+    res.json(`Producto con id ${id} borrado con exito`)
+}
+
+export const borrar_productos = async (req, res) => {
+    await api.borrarAll()
+    res.json('Productos borrados')
+}
