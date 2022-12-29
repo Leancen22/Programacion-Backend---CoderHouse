@@ -7,5 +7,11 @@ describe("Test de integracion de Productos", () => {
         let productosApi = ProductosDaoMongo.getInstance()
         assert.deepStrictEqual(await productosApi.listarAll(), [])
     })
+
+    it('Deberia agregar un producto a la coleccion', async () => {
+        let productosApi = ProductosDaoMongo.getInstance()
+        await productosApi.guardar({title: "titulo test", price: 2, categoria: "categoria test", thumbnail: "Foto test"})
+        assert.deepStrictEqual(await productosApi.listarAll(), {title: "titulo test", price: 2, categoria: "categoria test", thumbnail: "Foto test"})
+    })
 })
 
