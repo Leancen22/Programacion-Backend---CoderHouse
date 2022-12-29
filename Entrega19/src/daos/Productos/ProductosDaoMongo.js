@@ -16,7 +16,7 @@ class ProductosDaoMongo extends ContainerMongo {
 
     async listarPorCategoria(categoria) {
         try {
-          return await this.collecion.find(categoria);
+          return await this.collection.find(categoria);
         } catch (error) {
           logError(error);
         }
