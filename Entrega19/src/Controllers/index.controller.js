@@ -34,6 +34,10 @@ export const login = (req, res) => {
     }
 }
 
+export const login_success = (req, res) => {
+    res.redirect('/vista')
+}
+
 export const error_login = (req, res) => {
     res.render('error-login')
 }
@@ -61,7 +65,6 @@ export const post_registro = async (req, res) => {
         await api_carrito.guardar({email, productos: []})  
         const carrito = await api_carrito.listarUno({ email })
         await enviarEmail(req.body)
-        console.log(carrito.length)
         res.redirect('/login')
     }
 }

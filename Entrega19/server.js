@@ -58,7 +58,7 @@ app.use(bodyParser.json());
 app.set('views', './views')
 app.set('view engine', 'pug')
 
-passport.use(new LocalStrategy(
+passport.use('login', new LocalStrategy(
     async (username, password, done) => {
         await loginPassport(username, password, done)
     })
@@ -107,13 +107,9 @@ app.use('/carrito', carritosRouter)
 
 /*--------------------------------------------------------------------------------------------*/
 
-//Aun debe cambiarse
-app.post('/login', passport.authenticate('local',  {successRedirect: '/vista', failureRedirect: '/error-login'} ));
-
-
 //Ruta para excepciones
 app.get('*', (req, res) => {
-    let ruta = req.url
+    //let ruta = req.url
     // logger.warn(`Ruta ${ruta} con metodo ${req.method} no implementada`)
     NoImplementada(req)
     res.send('ruta no implementada')
