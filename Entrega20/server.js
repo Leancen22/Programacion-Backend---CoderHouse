@@ -47,6 +47,10 @@ import { loginPassport } from "./utils/passport.js"
 import {centro_mensajes} from "./utils/Mensajeria/mensajes_chat.js"
 
 
+// GraphQL
+import { graphqlHTTP } from 'express-graphql'
+
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
@@ -102,7 +106,18 @@ app.use(passport.session());
 app.use('/', indexRouter)
 app.use('/process', processRouter)
 app.use('/api/productos_test', testProductos)
-app.use('/productos', productosRouter)
+
+
+app.use('/productos', graphqlHTTP({
+    schema: productosSchema,
+    rootValue: {
+        listar_productos
+    },
+    graphiql: true,
+}))
+//app.use('/productos', productosRouter)
+
+
 app.use('/carrito', carritosRouter)
 
 /*--------------------------------------------------------------------------------------------*/
