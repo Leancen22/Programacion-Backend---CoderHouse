@@ -49,6 +49,8 @@ import {centro_mensajes} from "./utils/Mensajeria/mensajes_chat.js"
 
 // GraphQL
 import { graphqlHTTP } from 'express-graphql'
+import { listar_productos } from "./src/graphql/resolvers.js"
+import productosSchema from "./src/graphql/schema.js"
 
 
 app.use(express.json())
