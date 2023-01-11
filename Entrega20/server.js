@@ -49,7 +49,7 @@ import {centro_mensajes} from "./utils/Mensajeria/mensajes_chat.js"
 
 // GraphQL
 import { graphqlHTTP } from 'express-graphql'
-import { listar_productos } from "./src/graphql/resolvers.js"
+import { listar_productos, listar_producto, borrar_producto, actualizar_producto } from "./src/graphql/resolvers.js"
 import productosSchema from "./src/graphql/schema.js"
 
 
@@ -109,11 +109,14 @@ app.use('/', indexRouter)
 app.use('/process', processRouter)
 app.use('/api/productos_test', testProductos)
 
-
+//esta ruta se prueba desde /productos/_graphql
 app.use('/productos', graphqlHTTP({
     schema: productosSchema,
     rootValue: {
-        listar_productos
+        listar_productos,
+        listar_producto,
+        borrar_producto,
+        actualizar_producto
     },
     graphiql: true,
 }))

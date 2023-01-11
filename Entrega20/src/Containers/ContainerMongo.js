@@ -35,7 +35,8 @@ class ContainerMongo {
             await this.conn.connect()
 
             if (mongoose.Types.ObjectId.isValid(id)) {
-                const docs = await this.collection.findOne({'_id': id}, {__v: 0})
+                //const docs = await this.collection.findOne({'_id': id}, {__v: 0})
+                const docs = await this.collection.findOne(id)
                 if (docs.length == 0) {
                     throw Error('El producto solicitado no existe')
                 } else {
