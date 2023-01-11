@@ -21,6 +21,7 @@ const productosSchema = buildSchema(`
     type Mutation {
         borrar_producto(_id: ID!): Productos
         actualizar_producto(_id: ID!, datos: ProductosUpdate): Productos
+        guardar_producto(datos: ProductosUpdate): Productos
     }
 `)
 

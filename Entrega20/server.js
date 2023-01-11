@@ -49,7 +49,7 @@ import {centro_mensajes} from "./utils/Mensajeria/mensajes_chat.js"
 
 // GraphQL
 import { graphqlHTTP } from 'express-graphql'
-import { listar_productos, listar_producto, borrar_producto, actualizar_producto } from "./src/graphql/resolvers.js"
+import { listar_productos, listar_producto, borrar_producto, actualizar_producto, guardar_producto } from "./src/graphql/resolvers.js"
 import productosSchema from "./src/graphql/schema.js"
 
 
@@ -116,7 +116,8 @@ app.use('/productos', graphqlHTTP({
         listar_productos,
         listar_producto,
         borrar_producto,
-        actualizar_producto
+        actualizar_producto,
+        guardar_producto
     },
     graphiql: true,
 }))

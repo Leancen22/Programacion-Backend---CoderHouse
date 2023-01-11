@@ -17,3 +17,7 @@ export async function borrar_producto (id) {
 export async function actualizar_producto (id, datos) {
     return await productosApi.actualizar(id, datos)
 }
+
+export async function guardar_producto (datos) {
+    return await productosApi.guardar(datos)
+}
