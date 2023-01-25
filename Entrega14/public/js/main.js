@@ -124,3 +124,50 @@ function render(mensaje) {
 }
 
 
+
+/////////////////////////////////////////////////////////////////////
+
+//Agrega productos al carrito y devuelve feedback
+const producto_especifico = document.querySelectorAll('.agregar')
+producto_especifico.forEach( (btn) => {
+    btn.addEventListener('click', async (e) => {             
+        btn.textContent = "Producto agregado"
+        setTimeout(() => {
+            btn.textContent = "Agregar al Carrito"
+        }, 2000);
+        const producto = {
+            id: e.target.dataset.id,
+            title: e.target.parentElement.children[0].textContent,
+            price: e.target.parentElement.children[1].textContent,
+            categoria: e.target.parentElement.children[2].textContent,
+            thumbnail: e.target.parentElement.querySelector('img').src,
+            cantidad: 1
+        };
+        await fetch('/carrito/productos', {
+            method: 'POST',
+            body: JSON.stringify(producto),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+    })
+})
+
+//Elimina productos del carrito
+const producto_eliminar = document.querySelectorAll('.eliminar')
+producto_eliminar.forEach( (btn) => {
+    btn.addEventListener('click', async (e) => {             
+        await fetch(`/carrito/productos/${e.target.dataset.id}`, {
+            method: 'DELETE',
+        });
+    })
+})
+
+//Enviar mensaje al finalizar compra
+const finalizarCompra = document.querySelector('.comprar')
+finalizarCompra.addEventListener('click', async () => {
+    finalizarCompra.textContent = 'Compra realizada!'
+    await fetch('/carrito/compra_finalizada', {
+        method: 'POST'
+    })
+})
