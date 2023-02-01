@@ -57,9 +57,11 @@ export const registro = (req, res) => {
 export const post_registro = async (req, res) => {
     const {username, password, email, telefono, edad, direccion, avatar} = req.body
 
+    //const email = req.user.email
+    //const carrito = await CarritoDao.listarUno({ email })
+
     const usuarios = await api.listarAll()
     const usuario = usuarios.find(usr => usr.email == email)
-    
     if (usuario) {
         res.redirect('/error-registro')
     } else {

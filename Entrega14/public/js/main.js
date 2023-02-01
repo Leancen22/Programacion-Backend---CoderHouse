@@ -9,19 +9,28 @@ socket.on('from-server-productos', productos => {
     console.log(productos)
     render_productos(productos)
 })
-//
-// function render(mensajes) {
-//
-//     const cuerpoMensajesHTML = mensajes.map(msj => {
-//         return `
-//             <span><b style="color: blue;">${msj.user}</b> <span style="color: brown;">[${msj.fecha_actual}]</span>:</span><span style="color: green; font-style: italic;"> ${msj.mensaje}</span>
-//         `
-//     }).join('<br>')
-//
-//     document.querySelector('#historialChat').innerHTML = cuerpoMensajesHTML
-//
-// }
-//
+
+//Elimina productos del listado de la vista
+const BorrarProducto = document.querySelectorAll('.borrar_producto')
+BorrarProducto.forEach( (btn) => {
+    btn.addEventListener('click', async (e) => {
+        await fetch(`/productos/${e.target.dataset.id}`, {
+            method: 'DELETE'
+        })
+        location.href = '/vista'
+    })
+})
+
+//Agrega productos a la lista de productos de la vista
+const AgregarProducto = document.querySelector('#agregar_producto')
+AgregarProducto.addEventListener('click', async () => {
+    await fetch('/productos/guardar_producto', {
+        method: 'POST'
+    })
+    location.href = '/vista'
+})
+
+
 function render_productos(productos) {
     const cuerpoMensajesHTML = productos.map(prod => {
         return `
@@ -35,23 +44,7 @@ function render_productos(productos) {
 
     document.querySelector('#historialProductos').innerHTML = cuerpoMensajesHTML
 }
-//
-// function enviarMensaje () {
-//     const inputUser = document.querySelector('#user')
-//     const inputContenido = document.querySelector('#contenidoMensaje')
-//
-//     const emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-//
-//     const mensaje = {
-//         author: inputUser.value,
-//         text: inputContenido.value
-//     }
-//
-//     if (emailRegex.test(inputUser)) {
-//         socket.emit('from-client-mensaje', mensaje)
-//     }
-// }
-//
+
 function enviarProducto () {
     const inputNombre = document.querySelector('#title')
     const inputPrecio = document.querySelector('#price')
@@ -111,11 +104,14 @@ function enviarMensaje () {
     socket.emit('nuevoMensaje', mensaje)
 }
 
+/*<span><b style="color: blue;">${msj.author['email']}</b> <span style="color: brown;">[${msj.fyh}]</span>:</span><span style="color: green; font-style: italic;">  <img src='${msj.author['avatar']}' width="30px"/></span>*/
+
 function render(mensaje) {
 
     const cuerpoMensajesHTML = mensaje.map(msj => {
+        console.log(msj._doc.text)
         return `
-            <span><b style="color: blue;">${msj.author['email']}</b> <span style="color: brown;">[${msj.fyh}]</span>:</span><span style="color: green; font-style: italic;"> ${msj.text} <img src='${msj.author['avatar']}' width="30px"/></span>
+            <span><b style="color: blue;">${msj._doc.author['email']}</b> <span style="color: brown;">[${msj._doc.fyh}]</span>:</span><span style="color: green; font-style: italic;"> ${msj._doc.text} <img src='${msj._doc.author['avatar']}' width="30px"/></span>
         `
     }).join('<br>')
 

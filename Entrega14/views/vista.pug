@@ -33,7 +33,7 @@ block vista
                     label(for="thumbnail")
                         b Foto URL
                     input(id="thumbnail" class="form-control" name="thumbnail" type="text")
-                button(class="btn btn-success mt-3 mb-5 btn-block" onclick="enviarProducto()") Enviar
+                button(class="btn btn-success mt-3 mb-5 btn-block" id="agregar_producto" onclick="enviarProducto()") Enviar
             hr
         h2(style="color: crimson;") Lista de Productos
         if productos.length
@@ -60,6 +60,8 @@ block vista
                             img(src=producto.thumbnail width="30")
                         button(data-id=producto._id class="agregar btn btn-success mt-3") Agregar al Carrito
                         button(data-id=producto._id class="eliminar btn btn-danger mt-3") Eliminar del Carrito
+                        if admin == true
+                            button(data-id=producto._id class="borrar_producto btn btn-warning mt-3") Eliminar de la lista
         else 
             h3(class="alert alert-warning") No hay productos
     include partials/chat

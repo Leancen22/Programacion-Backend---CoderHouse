@@ -15,9 +15,10 @@ export const guardar_producto = async (req, res) => {
     try {
         Ruta(req)
         await api.guardar({...req.body})
-        res.redirect('/vista')
+        //res.redirect('/vista')
     } catch (error) {
         logger.error(`Ha ocurrido un error ${error}`)
+        res.json(`Ha ocurrido un error ${error}`)
     }
 }
 

@@ -11,3 +11,7 @@
     --> starting at object with constructor 'Socket'
     |     property 'parser' -> object with constructor 'HTTPParser'
     --- property 'socket' closes the circle
+[2023-01-26T19:07:10.005] [ERROR] default - Ha ocurrido un error Error: ValidationError: thumbnail: Path `thumbnail` is required., categoria: Path `categoria` is required., price: Path `price` is required., title: Path `title` is required.
+[2023-01-26T19:09:37.589] [ERROR] default - Ha ocurrido un error Error: ValidationError: thumbnail: Path `thumbnail` is required., categoria: Path `categoria` is required., price: Path `price` is required., title: Path `title` is required.
+[2023-01-26T19:10:52.442] [ERROR] default - Ha ocurrido un error TypeError: Found non-callable @@iterator
+[2023-01-27T00:00:52.172] [ERROR] default - Ha ocurrido un error Error: ValidationError: thumbnail: Path `thumbnail` is required., categoria: Path `categoria` is required., price: Path `price` is required., title: Path `title` is required.

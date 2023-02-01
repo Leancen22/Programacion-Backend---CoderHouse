@@ -24,7 +24,7 @@ export const centro_mensajes = async (io) => {
     
         socket.on('nuevoMensaje', async mensaje => {
             mensaje.fyh = new Date().toLocaleString()
-            await mensajesApi.guardar(mensaje)
+            await mensajesApi2.guardar(mensaje)
             console.log(mensaje)
             io.sockets.emit('mensajes', await listarMensajesNormalizados())
             //socket.emit('mensajes', await mensajesApi.listarAll())
@@ -33,7 +33,7 @@ export const centro_mensajes = async (io) => {
 }
 
 async function listarMensajesNormalizados() {
-    const mensajes = await mensajesApi.listarAll()
+    const mensajes = await mensajesApi2.listarAll()
     const normalizados = normalizarMensaje({id: 'mensajes', mensajes})
     return normalizados
 }

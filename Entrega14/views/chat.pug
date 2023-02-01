@@ -12,10 +12,12 @@ html(lang="en")
     body 
         div(class="container mt-3")
             div(class="jumbotron")
+                a(href="/vista" class="btn btn-success mb-3") Volver
                 h3(style="color: blue;") Centro de Mensajes
                 div(id="porcentaje")
                 br
                 form()
+                    button(style="display: none;" id="agregar_producto" onclick="enviarProducto()") Enviar
                     div(class="form-group")
                         label(for="firstname")
                             b firstname
